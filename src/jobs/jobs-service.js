@@ -1,6 +1,6 @@
 const JobsService = {
   getAllJobs(knex) {
-    return knex.select('*').from('job');
+    return knex.select('*').from('jobs');
   },
 };
 
