@@ -1,7 +1,5 @@
-INSERT INTO job (type)
+INSERT INTO customer (type)
 VALUES 
-    ('power washing'),
-    ('fencing'),
-    ('cabinets'),
-    ('tiny homes'),
-    ('railing')
+    ('Hank'),
+    ('Pam'),
+    ('Domino')

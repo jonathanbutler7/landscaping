@@ -1,3 +1,5 @@
+-- psql -U postgres -d construction -f ./seeds/seed.job.sql
+
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS technician;
@@ -17,8 +19,7 @@ CREATE TABLE job (
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     type TEXT NOT NULL,
     date_requested TEXT NOT NULL,
-    zip TEXT NOT NULL,
-    customer_id TEXT NOT NULL
+    zip TEXT NOT NULL
 );
 CREATE TABLE technician (
     _id uuid DEFAULT uuid_generate_v4 (),
