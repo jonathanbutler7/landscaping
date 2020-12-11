@@ -1,15 +1,21 @@
 const Service = {
-  getAllTechnicians(knex) {
-    return knex.select('*').from('technicians');
+  getAll(knex, endpoint) {
+    return knex.select('*').from(endpoint);
   },
-  getById(knex, id) {
-    return knex.from('technicians').where('_id', id).first();
+  insert(knex, newItem, endpoint) {
+    return knex
+      .insert(newItem)
+      .into(endpoint)
+      .returning('*');
   },
-  updateTech(knex, id, body) {
-    return knex('technicians').where({ _id: id }).update(body).returning('*');
+  getById(knex, id, endpoint) {
+    return knex.from(endpoint).where('_id', id).first();
   },
-  deleteTech(knex, id) {
-    return knex('technicians').where({ _id: id }).delete().returning('*');
+  updateTech(knex, id, body, endpoint) {
+    return knex(endpoint).where({ _id: id }).update(body).returning('*');
+  },
+  deleteTech(knex, id, endpoint) {
+    return knex(endpoint).where({ _id: id }).delete().returning('*');
   },
 };
 
