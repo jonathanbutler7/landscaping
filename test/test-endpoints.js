@@ -7,9 +7,6 @@ const endpoint = '/technicians';
 const name = 'technicians';
 
 describe('App', () => {
-  it('GET / responds with 200 containing "Hello, world!lol"', () => {
-    return supertest(app).get('/').expect(200, 'Hello, boilerplate!');
-  });
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -17,6 +14,10 @@ describe('App', () => {
   before('make knex instance', () => {
     app.set('db', db);
   });
+
+  before('clean the table', () =>
+    db.raw('TRUNCATE customers, jobs, technicians')
+  );
 
   describe(`GET ${endpoint}`, () => {
     context(`Given there are no ${name}`, () => {
@@ -40,21 +41,6 @@ describe('App', () => {
           .expect(200, testTechnicians);
       });
     });
-    // context("Given there are articles in the database", () => {
-    //   const testUsers = makeUsersArray();
-    //   const testArticles = makeArticlesArray();
-
-    //   beforeEach("insert articles", () => {
-    //     return db.into('blogful_users').insert(testUsers)
-    //     .then(() => {
-    //       return db.into("blogful_articles").insert(testArticles);
-    //     })
-
-    //   });
-    //   it("responds with 200 and all of the articles", () => {
-    //     return supertest(app).get("/api/articles").expect(200, testArticles);
-    //   });
-    // });
   });
   after('disconnect from db', () => db.destroy());
 });
