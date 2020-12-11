@@ -6,7 +6,8 @@ const Service = {
     return knex.insert(newItem).into(endpoint).returning('*');
   },
   getById(knex, id, endpoint) {
-    return knex.from(endpoint).where('_id', id).first();
+    // return knex.from(endpoint).where('_id', id).first();
+    return knex.from(endpoint).select('*').where('_id', id).returning('*');
   },
   update(knex, id, body, endpoint) {
     return knex(endpoint).where({ _id: id }).update(body).returning('*');

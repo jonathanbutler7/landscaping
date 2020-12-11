@@ -17,20 +17,32 @@ jobsRouter
     }
   })
   .post(jsonParser, async (req, res) => {
+    const db = req.app.get('db');
     const { type, date_requested, zip } = req.body;
-    const newTechnician = {
+    const newJob = {
       type,
       date_requested,
       zip,
     };
-    const db = req.app.get('db');
+    const pairs = Object.entries(newJob);
+    const missingParams = [];
+    pairs.forEach((key) => {
+      if (key[1] == null) {
+        missingParams.push(key[0]);
+      }
+    });
     try {
-      const result = await Service.insert(db, newTechnician, endpoint);
-      res.send(result);
+      const result = await Service.insert(db, newJob, endpoint);
+      res.status(201).send(result);
     } catch (error) {
-      res.send(error);
+      if (missingParams.length > 0) {
+        res
+          .status(400)
+          .send({ message: `Missing '${missingParams}' in request body` });
+      }
     }
   });
+
 jobsRouter
   .route('/:id')
   .get(async (req, res) => {
@@ -40,7 +52,10 @@ jobsRouter
       const result = await Service.getById(db, id, endpoint);
       res.send(result);
     } catch (error) {
-      res.send(error);
+      res.status(404).json({
+        error: { message: `Article with id ${id} does not exist.` },
+        more: error,
+      });
     }
   })
   .put(jsonParser, async (req, res) => {
