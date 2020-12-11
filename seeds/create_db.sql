@@ -19,7 +19,9 @@ CREATE TABLE jobs (
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     type TEXT NOT NULL,
     date_requested TEXT NOT NULL,
-    zip TEXT NOT NULL
+    zip TEXT NOT NULL,
+    items text[][],
+    data json
 );
 CREATE TABLE technicians (
     _id uuid DEFAULT uuid_generate_v4 (),
