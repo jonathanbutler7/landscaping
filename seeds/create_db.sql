@@ -1,4 +1,4 @@
--- psql -U postgres -d construction -f ./seeds/seed.job.sql
+-- psql -U postgres -d construction -f ./seeds/seed.jobs.sql
 
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS jobs;

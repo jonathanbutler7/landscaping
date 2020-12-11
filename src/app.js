@@ -6,9 +6,9 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
 const app = express();
-const jobsRouter = require('./routes/jobs/jobs-router');
-const customersRouter = require('./routes/customers/customers-router');
-const techniciansRouter = require('./routes/technicians/technicians-router');
+const jobsRouter = require('./routes/jobs-router');
+const customersRouter = require('./routes/customers-router');
+const techniciansRouter = require('./routes/technicians-router');
 
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
 
