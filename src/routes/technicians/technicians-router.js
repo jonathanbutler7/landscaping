@@ -1,5 +1,5 @@
 const express = require('express');
-const Service = require('./technicians-service');
+const Service = require('../../requests-service');
 
 const endpoint = 'technicians';
 const techniciansRouter = express.Router();
@@ -35,17 +35,6 @@ techniciansRouter
 
 techniciansRouter
   .route('/:id')
-  .put(jsonParser, async (req, res) => {
-    const { id } = req.params;
-    const db = req.app.get('db');
-    const { body } = req;
-    try {
-      const result = await Service.updateTech(db, id, body, endpoint);
-      res.send(result);
-    } catch (error) {
-      res.send(error);
-    }
-  })
   .get(async (req, res) => {
     const { id } = req.params;
     const db = req.app.get('db');
@@ -56,11 +45,22 @@ techniciansRouter
       res.send(error);
     }
   })
+  .put(jsonParser, async (req, res) => {
+    const { id } = req.params;
+    const db = req.app.get('db');
+    const { body } = req;
+    try {
+      const result = await Service.update(db, id, body, endpoint);
+      res.send(result);
+    } catch (error) {
+      res.send(error);
+    }
+  })
   .delete(async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
     try {
-      const result = await Service.deleteTech(db, id, endpoint);
+      const result = await Service.delete(db, id, endpoint);
       const techId = result[0]._id;
       res.send({ message: `Deleted technician with id: ${techId}` });
     } catch (error) {
