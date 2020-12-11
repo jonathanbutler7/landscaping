@@ -6,7 +6,10 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
 const app = express();
-const jobsRouter = require('./jobs/jobs-router');
+const jobsRouter = require('./routes/jobs/jobs-router');
+const customersRouter = require('./routes/customers/customers-router');
+const techniciansRouter = require('./routes/technicians/technicians-router');
+
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common';
 
 app.use(morgan(morganOption));
@@ -20,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Hello, boilerplate!');
 });
 
-app.use(function errorHandler(error, req, res, next) {
+app.use((error, res) => {
   let response;
   if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } };
