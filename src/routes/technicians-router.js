@@ -1,5 +1,5 @@
 const express = require('express');
-const Service = require('../../service');
+const RouteService = require('./route-service');
 
 const endpoint = 'technicians';
 const techniciansRouter = express.Router();
@@ -10,7 +10,7 @@ techniciansRouter
   .get(async (req, res) => {
     const db = req.app.get('db');
     try {
-      const result = await Service.getAll(db, endpoint);
+      const result = await RouteService.getAll(db, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -26,7 +26,7 @@ techniciansRouter
     };
     const db = req.app.get('db');
     try {
-      const result = await Service.insert(db, newTechnician, endpoint);
+      const result = await RouteService.insert(db, newTechnician, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -39,7 +39,7 @@ techniciansRouter
     const { id } = req.params;
     const db = req.app.get('db');
     try {
-      const result = await Service.getById(db, id, endpoint);
+      const result = await RouteService.getById(db, id, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -50,7 +50,7 @@ techniciansRouter
     const db = req.app.get('db');
     const { body } = req;
     try {
-      const result = await Service.update(db, id, body, endpoint);
+      const result = await RouteService.update(db, id, body, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -60,7 +60,7 @@ techniciansRouter
     const db = req.app.get('db');
     const { id } = req.params;
     try {
-      const result = await Service.delete(db, id, endpoint);
+      const result = await RouteService.delete(db, id, endpoint);
       const techId = result[0]._id;
       res.send({ message: `Deleted technician with id: ${techId}` });
     } catch (error) {

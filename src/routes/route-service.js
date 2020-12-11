@@ -1,4 +1,4 @@
-const Service = {
+const RouteService = {
   getAll(knex, endpoint) {
     return knex.select('*').from(endpoint);
   },
@@ -17,4 +17,4 @@ const Service = {
   },
 };
 
-module.exports = Service;
+module.exports = RouteService;
