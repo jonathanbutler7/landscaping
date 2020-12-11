@@ -1,6 +1,31 @@
-INSERT INTO technicians (name, email, phone, address)
-VALUES 
-    ('Joe', 'tech@tech.com', '123-123-1234', '123 Orchard Avenue'),
-    ('Bill', 'tech@tech.com', '123-123-1234', '123 Orchard Avenue'),
-    ('Handy', 'tech@tech.com', '123-123-1234', '123 Orchard Avenue'),
-    ('Dandy', 'tech@tech.com', '123-123-1234', '123 Orchard Avenue')
+INSERT INTO
+    technicians (name, email, phone, address, data)
+VALUES
+    (
+        'Joe',
+        'tech@tech.com',
+        '123-123-1234',
+        '123 Orchard Avenue',
+        '{"yard work", "landscaping"}'
+    ),
+    (
+        'Bill',
+        'tech@tech.com',
+        '123-123-1234',
+        '123 Orchard Avenue',
+        '{"yard work", "landscaping"}'
+    ),
+    (
+        'Handy',
+        'tech@tech.com',
+        '123-123-1234',
+        '123 Orchard Avenue',
+        '{"yard work", "landscaping"}'
+    ),
+    (
+        'Dandy',
+        'tech@tech.com',
+        '123-123-1234',
+        '123 Orchard Avenue',
+        '{"yard work", "landscaping"}'
+    )
