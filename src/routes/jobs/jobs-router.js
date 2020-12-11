@@ -5,15 +5,32 @@ const endpoint = 'jobs';
 const jobsRouter = express.Router();
 const jsonParser = express.json();
 
-jobsRouter.route('/').get(async (req, res) => {
-  const db = req.app.get('db');
-  try {
-    const result = await Service.getAll(db, endpoint);
-    res.send(result);
-  } catch (error) {
-    res.send(error);
-  }
-});
+jobsRouter
+  .route('/')
+  .get(async (req, res) => {
+    const db = req.app.get('db');
+    try {
+      const result = await Service.getAll(db, endpoint);
+      res.send(result);
+    } catch (error) {
+      res.send(error);
+    }
+  })
+  .post(jsonParser, async (req, res) => {
+    const { type, date_requested, zip } = req.body;
+    const newTechnician = {
+      type,
+      date_requested,
+      zip,
+    };
+    const db = req.app.get('db');
+    try {
+      const result = await Service.insert(db, newTechnician, endpoint);
+      res.send(result);
+    } catch (error) {
+      res.send(error);
+    }
+  });
 jobsRouter
   .route('/:id')
   .get(async (req, res) => {

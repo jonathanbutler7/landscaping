@@ -17,7 +17,9 @@ techniciansRouter
     }
   })
   .post(jsonParser, async (req, res) => {
-    const { name, email, phone, address } = req.body;
+    const {
+      name, email, phone, address,
+    } = req.body;
     const newTechnician = {
       name,
       email,
