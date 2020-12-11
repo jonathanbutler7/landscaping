@@ -11,9 +11,9 @@ jobsRouter
     const db = req.app.get('db');
     try {
       const result = await RouteService.getAll(db, endpoint);
-      res.send(result);
+      res.status(200).send(result);
     } catch (error) {
-      res.send(error);
+      res.status(404).send(error);
     }
   })
   .post(jsonParser, async (req, res) => {
@@ -50,7 +50,7 @@ jobsRouter
     const db = req.app.get('db');
     try {
       const result = await RouteService.getById(db, id, endpoint);
-      res.comment = result;
+      foundJob = result;
       next();
     } catch (error) {
       res.status(404).json({
@@ -60,7 +60,7 @@ jobsRouter
     }
   })
   .get(async (req, res) => {
-    res.send(res.comment);
+    res.send(foundJob);
   })
   .put(jsonParser, async (req, res) => {
     const db = req.app.get('db');

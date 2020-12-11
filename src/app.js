@@ -8,6 +8,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const app = express();
+app.get("/", (req, res) => {
+  res.send("Hello, boilerplate!");
+});
 const jobsRouter = require('./routes/jobs-router');
 const customersRouter = require('./routes/customers-router');
 const techniciansRouter = require('./routes/technicians-router');
