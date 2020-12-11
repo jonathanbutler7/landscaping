@@ -50,7 +50,6 @@ jobsRouter
     const db = req.app.get('db');
     try {
       const result = await Service.getById(db, id, endpoint);
-      // res.send(result);
       res.comment = result;
       next();
     } catch (error) {
