@@ -45,18 +45,23 @@ jobsRouter
 
 jobsRouter
   .route('/:id')
-  .get(async (req, res) => {
+  .all(async (req, res, next) => {
     const { id } = req.params;
     const db = req.app.get('db');
     try {
       const result = await Service.getById(db, id, endpoint);
-      res.send(result);
+      // res.send(result);
+      res.comment = result;
+      next();
     } catch (error) {
       res.status(404).json({
         error: { message: `Article with id ${id} does not exist.` },
         more: error,
       });
     }
+  })
+  .get(async (req, res) => {
+    res.send(res.comment);
   })
   .put(jsonParser, async (req, res) => {
     const { id } = req.params;
