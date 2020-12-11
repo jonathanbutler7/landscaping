@@ -1,5 +1,5 @@
 const express = require('express');
-const Service = require('../../requests-service');
+const Service = require('../../service');
 
 const endpoint = 'customers';
 const customersRouter = express.Router();
@@ -34,6 +34,7 @@ customersRouter
       res.send(error);
     }
   });
+
 customersRouter
   .route('/:id')
   .get(async (req, res) => {

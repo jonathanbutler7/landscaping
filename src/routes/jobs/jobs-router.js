@@ -1,5 +1,5 @@
 const express = require('express');
-const Service = require('../../requests-service');
+const Service = require('../../service');
 
 const endpoint = 'jobs';
 const jobsRouter = express.Router();
