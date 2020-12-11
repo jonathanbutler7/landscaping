@@ -64,11 +64,21 @@ jobsRouter
     res.send(res.comment);
   })
   .put(jsonParser, async (req, res) => {
-    const { id } = req.params;
     const db = req.app.get('db');
-    const { body } = req;
+    const { id } = req.params;
+    const { type, date_requested, zip } = req.body;
+    const newJob = { type, date_requested, zip };
+    const numOfVals = Object.values(newJob).filter(Boolean).length;
+    if (numOfVals === 0) {
+      res.status(400).json({
+        error: {
+          message:
+            "Request body must contain either 'type', 'date_requested' or 'zip'",
+        },
+      });
+    }
     try {
-      const result = await Service.update(db, id, body, endpoint);
+      const result = await Service.update(db, id, newJob, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -80,7 +90,7 @@ jobsRouter
     try {
       const result = await Service.delete(db, id, endpoint);
       const jobId = result[0]._id;
-      res.send({ message: `Deleted job with id: ${jobId}` });
+      res.status(204).send({ message: `Deleted job with id: ${jobId}` });
     } catch (error) {
       res.send(error);
     }
