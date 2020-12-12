@@ -10,14 +10,14 @@ function validateBearerToken(req, res, next) {
 }
 
 function throwError(error, res) {
-    let response;
-    if (NODE_ENV === 'production') {
-      response = { error: { message: 'server error' } };
-    } else {
-      console.error(error);
-      response = { message: error.message, error };
-    }
-    res.status(500).json(response);
+  let response;
+  if (NODE_ENV === 'production') {
+    response = { error: { message: 'server error' } };
+  } else {
+    console.error(error);
+    response = { message: error.message, error };
   }
+  res.status(500).json(response);
+}
 
-module.exports = { validateBearerToken, throwError }
+module.exports = { validateBearerToken, throwError };

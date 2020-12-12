@@ -1,7 +1,7 @@
 const app = require('../src/app');
 const knex = require('knex');
 const { API_TOKEN, DATABASE_URL } = require('../src/config');
-const { createWorkers } = require('./workers-fixtures');
+const { createWorkers } = require('./fixtures/workers-fixtures');
 const supertest = require('supertest');
 const endpoint = '/workers';
 const name = 'workers';
@@ -19,9 +19,7 @@ context('Workers endpoints', () => {
   before('clean the table', () =>
     db.raw('TRUNCATE customers, orders, workers')
   );
-  after('clean the table', () =>
-    db.raw('TRUNCATE customers, orders, workers')
-  );
+  after('clean the table', () => db.raw('TRUNCATE customers, orders, workers'));
 
   context(`GET ${endpoint}`, () => {
     describe(`Given there are no ${name}`, () => {
@@ -31,19 +29,13 @@ context('Workers endpoints', () => {
           .set('Authorization', API_TOKEN)
           .expect(200, []);
       });
-    });
-
-    context(`POST ${endpoint}`, () => {
-      describe(`Given the POST is missing a field`, () => {
-        it(`responds with 400 and error message`, () => {
-          const newWorker = {
-            name: 'John',
-          };
+      context(`DELETE ${endpoint}/id`, () => {
+        it(`responds with 404`, () => {
+          const id = 'abc';
           return supertest(app)
-            .post(endpoint)
-            .send(newWorker)
+            .delete(`${endpoint}/${id}`)
             .set('Authorization', API_TOKEN)
-            .expect(400, { message: 'Body fields must not be falsy.' });
+            .expect(404, { error: `Worker with id ${id} does not exist.` });
         });
       });
     });
@@ -79,6 +71,19 @@ context('Workers endpoints', () => {
   });
 
   describe(`POST to ${endpoint}`, () => {
+    describe(`Given the POST is missing a field`, () => {
+      it(`responds with 400 and error message`, () => {
+        const newWorker = {
+          name: 'John',
+        };
+        return supertest(app)
+          .post(endpoint)
+          .send(newWorker)
+          .set('Authorization', API_TOKEN)
+          .expect(400, { message: 'Body fields must not be falsy.' });
+      });
+    });
+
     it(`creates a(n) ${name}, responds with 201, and a new ${name}`, () => {
       // this.retries(3);
       const newWorker = {
@@ -93,6 +98,7 @@ context('Workers endpoints', () => {
         .send(newWorker)
         .set('Authorization', API_TOKEN)
         .expect(201)
+        .retry(3)
         .expect((res) => {
           expect(res.body[0].name).to.eql(newWorker.name);
           expect(res.body[0].email).to.eql(newWorker.email);
@@ -102,18 +108,6 @@ context('Workers endpoints', () => {
           const actual = new Date(res.body[0].date_created).toLocaleString();
           expect(actual).to.eql(expected);
         });
-    });
-  });
-
-  context(`DELETE ${endpoint}/id`, () => {
-    describe(`Given there are no ${name}`, () => {
-      it(`responds with 404`, () => {
-        const id = 'abc';
-        return supertest(app)
-          .delete(`${endpoint}/${id}`)
-          .set('Authorization', API_TOKEN)
-          .expect(404, { error: `Worker with id ${id} does not exist.` });
-      });
     });
   });
 
