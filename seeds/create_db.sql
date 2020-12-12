@@ -32,5 +32,5 @@ CREATE TABLE workers (
     email TEXT NOT NULL,
     phone TEXT NOT NULL,
     address TEXT NOT NULL,
-    data text [] []
+    data text []
 );

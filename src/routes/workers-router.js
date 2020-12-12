@@ -17,16 +17,17 @@ workersRouter
     }
   })
   .post(jsonParser, async (req, res) => {
-    const { name, email, phone, address } = req.body;
-    const newWorkers = {
+    const { name, email, phone, address, data } = req.body;
+    const newWorker = {
       name,
       email,
       phone,
       address,
+      data,
     };
     const db = req.app.get('db');
     try {
-      const result = await RouteService.insert(db, newWorkers, endpoint);
+      const result = await RouteService.insert(db, newWorker, endpoint);
       res.status(201).send(result);
     } catch (error) {
       res.status(400).send(error);

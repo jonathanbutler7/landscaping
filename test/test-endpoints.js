@@ -51,5 +51,31 @@ describe('App', () => {
       });
     });
   });
+
+  describe(`POST to ${endpoint}`, () => {
+    it(`creates a(n) ${name}, responds with 201, and a new ${name}`, () => {
+      const newWorker = {
+        name: 'Joe',
+        email: 'tech@tech.com',
+        phone: '123-123-1234',
+        address: '123 Orchard Avenue',
+        data: ['yard work', 'landscaping'],
+      };
+      return supertest(app)
+        .post(endpoint)
+        .send(newWorker)
+        .set('Authorization', API_TOKEN)
+        .expect(201)
+        .expect((res) => {
+          expect(res.body[0].name).to.eql(newWorker.name);
+          expect(res.body[0].email).to.eql(newWorker.email);
+          expect(res.body[0].address).to.eql(newWorker.address);
+          expect(res.body[0]).to.have.property('_id');
+          const expected = new Date().toLocaleString();
+          const actual = new Date(res.body[0].date_created).toLocaleString();
+          expect(actual).to.eql(expected);
+        });
+    });
+  });
   after('disconnect from db', () => db.destroy());
 });
