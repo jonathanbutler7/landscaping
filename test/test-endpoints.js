@@ -42,7 +42,7 @@ context('App', () => {
           .expect(200, testData);
       });
       it(`Responds with the specified ${name}`, () => {
-        const id = '56442348-14b4-4e17-a2e2-964440c40224';
+        const id = testData[0]._id;
         expectedWorker = testData.filter((worker) => worker._id === id);
         return supertest(app)
           .get(`${endpoint}/${id}`)
@@ -85,7 +85,7 @@ context('App', () => {
         return supertest(app)
           .delete(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
-          .expect(404, { message: `Worker with ${id} does not exist` });
+          .expect(404, { error: `Worker with id ${id} does not exist.` });
       });
     });
   });
@@ -97,7 +97,23 @@ context('App', () => {
         return supertest(app)
           .put(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
-          .expect(404, { message: `Worker with ${id} does not exist` });
+          .expect(404, { error: `Worker with id ${id} does not exist.` });
+      });
+    });
+  });
+
+  describe(`PUT ${endpoint}/id`, () => {
+    context(`Given a null field`, () => {
+      it(`Responds with 404 and error message`, () => {
+        const testData = createWorkers();
+        const id = testData[0]._id;
+        const newWorker = {
+          name: null,
+        };
+        return supertest(app)
+          .put(`${endpoint}/${id}`, newWorker)
+          .set('Authorization', API_TOKEN)
+          .expect(404, { message: 'Body fields must not be null.' });
       });
     });
   });
