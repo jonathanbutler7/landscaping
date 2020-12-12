@@ -40,7 +40,7 @@ workersRouter
       const result = await RouteService.insert(db, newWorker, endpoint);
       res.status(201).send(result);
     } catch (error) {
-      res.status(400).send({ error: error });
+      res.status(400).send(error);
     }
   });
 

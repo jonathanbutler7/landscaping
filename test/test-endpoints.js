@@ -6,7 +6,7 @@ const supertest = require('supertest');
 const endpoint = '/workers';
 const name = 'workers';
 
-context('App', () => {
+context('Workers endpoitns', () => {
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -27,6 +27,20 @@ context('App', () => {
           .get(endpoint)
           .set('Authorization', API_TOKEN)
           .expect(200, []);
+      });
+    });
+
+    context(`POST ${endpoint}`, () => {
+      describe(`Given the POST is missing a field`, () => {
+        it(`responds with 400 and error message`, () => {
+          const newWorker = {
+            name: 'John',
+          };
+          return supertest(app)
+            .post(endpoint).send(newWorker)
+            .set('Authorization', API_TOKEN)
+            .expect(400, { message: 'Body fields must not be falsy.' });
+        });
       });
     });
 
@@ -125,17 +139,16 @@ context('App', () => {
           const id = testData[0]._id;
           console.log('+++++++++', id);
           const newWorker = {
-            name: 'John',
+            name: 'New Joe',
           };
-          console.log(`${endpoint}/${id}`, newWorker);
           return supertest(app)
             .put(`${endpoint}/${id}`)
             .send(newWorker)
             .set('Authorization', API_TOKEN)
-            .expect(200);
-          // .expect((res) => {
-          //   expect(res.body[0].name).to.eql(newWorker.name);
-          // });
+            .expect(200)
+            .expect((res) => {
+              expect(res.body[0].name).to.eql(newWorker.name);
+            });
         });
       });
     });
