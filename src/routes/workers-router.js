@@ -11,9 +11,9 @@ workersRouter
     const db = req.app.get('db');
     try {
       const result = await RouteService.getAll(db, endpoint);
-      res.send(result);
+      res.status(200).send(result);
     } catch (error) {
-      res.send(error);
+      res.status(404).send(error);
     }
   })
   .post(jsonParser, async (req, res) => {
@@ -27,9 +27,9 @@ workersRouter
     const db = req.app.get('db');
     try {
       const result = await RouteService.insert(db, newWorkers, endpoint);
-      res.send(result);
+      res.status(201).send(result);
     } catch (error) {
-      res.send(error);
+      res.status(400).send(error);
     }
   });
 
@@ -62,7 +62,7 @@ workersRouter
     try {
       const result = await RouteService.delete(db, id, endpoint);
       const techId = result[0]._id;
-      res.send({ message: `Deleted worker with id: ${techId}` });
+      res.status(204).send({ message: `Deleted worker with id: ${techId}` });
     } catch (error) {
       res.send(error);
     }

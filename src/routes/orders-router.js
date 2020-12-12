@@ -60,7 +60,7 @@ ordersRouter
     }
   })
   .get(async (req, res) => {
-    res.send(foundJob);
+    res.status(201).send(foundJob);
   })
   .put(jsonParser, async (req, res) => {
     const db = req.app.get('db');
