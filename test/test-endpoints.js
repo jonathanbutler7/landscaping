@@ -6,7 +6,7 @@ const supertest = require('supertest');
 const endpoint = '/workers';
 const name = 'workers';
 
-describe('App', () => {
+context('App', () => {
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -20,8 +20,8 @@ describe('App', () => {
     db.raw('TRUNCATE customers, orders, workers')
   );
 
-  describe(`GET ${endpoint}`, () => {
-    context(`Given there are no ${name}`, () => {
+  context(`GET ${endpoint}`, () => {
+    describe(`Given there are no ${name}`, () => {
       it('responds with 200 and an empty list', () => {
         return supertest(app)
           .get(endpoint)
@@ -78,12 +78,24 @@ describe('App', () => {
     });
   });
 
-  describe(`DELETE ${endpoint}/id`, () => {
-    context(`Given there are no ${name}`, () => {
+  context(`DELETE ${endpoint}/id`, () => {
+    describe(`Given there are no ${name}`, () => {
       it(`responds with 404`, () => {
         const id = 'abc';
         return supertest(app)
           .delete(`${endpoint}/${id}`)
+          .set('Authorization', API_TOKEN)
+          .expect(404, { message: `Worker with ${id} does not exist` });
+      });
+    });
+  });
+
+  describe(`PUT ${endpoint}/id`, () => {
+    context(`Given no articles`, () => {
+      it(`Responds with 404`, () => {
+        const id = 'abc';
+        return supertest(app)
+          .put(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
           .expect(404, { message: `Worker with ${id} does not exist` });
       });

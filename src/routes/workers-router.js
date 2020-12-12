@@ -54,7 +54,7 @@ workersRouter
       const result = await RouteService.update(db, id, body, endpoint);
       res.send(result);
     } catch (error) {
-      res.send(error);
+      res.status(404).send({ message: `Worker with ${id} does not exist` });
     }
   })
   .delete(async (req, res) => {
