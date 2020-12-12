@@ -77,5 +77,17 @@ describe('App', () => {
         });
     });
   });
+
+  describe(`DELETE ${endpoint}/id`, () => {
+    context(`Given there are no ${name}`, () => {
+      it(`responds with 404`, () => {
+        const id = 'abc';
+        return supertest(app)
+          .delete(`${endpoint}/${id}`)
+          .set('Authorization', API_TOKEN)
+          .expect(404, { message: `Worker with ${id} does not exist` });
+      });
+    });
+  });
   after('disconnect from db', () => db.destroy());
 });

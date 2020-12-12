@@ -62,10 +62,10 @@ workersRouter
     const { id } = req.params;
     try {
       const result = await RouteService.delete(db, id, endpoint);
-      const techId = result[0]._id;
-      res.status(204).send({ message: `Deleted worker with id: ${techId}` });
+      const workerId = result[0]._id;
+      res.status(204).send({ message: `Deleted worker with id: ${workerId}` });
     } catch (error) {
-      res.send(error);
+      res.status(404).send({ message: `Worker with ${id} does not exist` });
     }
   });
 
