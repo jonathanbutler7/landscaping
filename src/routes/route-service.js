@@ -13,6 +13,7 @@ const RouteService = {
     return knex(endpoint).where({ _id: id }).update(body).returning('*');
   },
   delete(knex, id, endpoint) {
+    console.log(id)
     return knex(endpoint).where({ _id: id }).delete().returning('*');
   },
 };

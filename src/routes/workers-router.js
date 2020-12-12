@@ -52,6 +52,9 @@ workersRouter
     try {
       const result = await RouteService.getById(db, id, endpoint);
       foundWorker = result;
+      if (!foundWorker.length) {
+        throw `Worker with id ${id} does not exist.`;
+      }
       next();
     } catch (error) {
       res.status(404).send({ error: `Worker with id ${id} does not exist.` });
@@ -61,13 +64,6 @@ workersRouter
     res.status(200).send(foundWorker);
   })
   .put(jsonParser, async (req, res) => {
-    // {
-    //   "name": "Joe",
-    //     "email": "tech@tech.com",
-    //     "phone": "123-123-1234",
-    //     "address": "123 Orchard Avenue",
-    //     "data": ["yard work", "landscaping"]
-    //     }
     const db = req.app.get('db');
     const { id } = req.params;
     const { name, email, phone, address, data } = req.body;
@@ -89,7 +85,7 @@ workersRouter
     try {
       const result = await RouteService.delete(db, id, endpoint);
       const workerId = result[0]._id;
-      res.status(204).send({ message: `Deleted worker with id: ${workerId}` });
+      res.status(200).send({ message: `Deleted worker with id: ${workerId}` });
     } catch (error) {
       res.status(404).send({ message: `Worker with ${id} does not exist` });
     }

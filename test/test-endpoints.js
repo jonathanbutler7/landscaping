@@ -6,7 +6,7 @@ const supertest = require('supertest');
 const endpoint = '/workers';
 const name = 'workers';
 
-context('Workers endpoitns', () => {
+context('Workers endpoints', () => {
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -17,6 +17,9 @@ context('Workers endpoitns', () => {
   });
 
   before('clean the table', () =>
+    db.raw('TRUNCATE customers, orders, workers')
+  );
+  after('clean the table', () =>
     db.raw('TRUNCATE customers, orders, workers')
   );
 
@@ -37,7 +40,8 @@ context('Workers endpoitns', () => {
             name: 'John',
           };
           return supertest(app)
-            .post(endpoint).send(newWorker)
+            .post(endpoint)
+            .send(newWorker)
             .set('Authorization', API_TOKEN)
             .expect(400, { message: 'Body fields must not be falsy.' });
         });
@@ -63,11 +67,20 @@ context('Workers endpoitns', () => {
           .set('Authorization', API_TOKEN)
           .expect(200, expectedWorker);
       });
+      it(`Responds with 204 and success message`, () => {
+        const id = testData[1]._id;
+        // expectedWorkers = testData.filter((worker) => worker._id === id);
+        return supertest(app)
+          .delete(`${endpoint}/${id}`)
+          .set('Authorization', API_TOKEN)
+          .expect(200, { message: `Deleted worker with id: ${id}` });
+      });
     });
   });
 
   describe(`POST to ${endpoint}`, () => {
     it(`creates a(n) ${name}, responds with 201, and a new ${name}`, () => {
+      // this.retries(3);
       const newWorker = {
         name: 'Joe',
         email: 'tech@tech.com',
@@ -137,7 +150,6 @@ context('Workers endpoitns', () => {
       describe(`Given a valid PUT request`, () => {
         it(`Responds with 200 and the new${name} object`, () => {
           const id = testData[0]._id;
-          console.log('+++++++++', id);
           const newWorker = {
             name: 'New Joe',
           };
