@@ -1,11 +1,11 @@
 const express = require('express');
 const RouteService = require('./route-service');
 
-const endpoint = 'technicians';
-const techniciansRouter = express.Router();
+const endpoint = 'workers';
+const workersRouter = express.Router();
 const jsonParser = express.json();
 
-techniciansRouter
+workersRouter
   .route('/')
   .get(async (req, res) => {
     const db = req.app.get('db');
@@ -18,7 +18,7 @@ techniciansRouter
   })
   .post(jsonParser, async (req, res) => {
     const { name, email, phone, address } = req.body;
-    const newTechnician = {
+    const newWorkers = {
       name,
       email,
       phone,
@@ -26,14 +26,14 @@ techniciansRouter
     };
     const db = req.app.get('db');
     try {
-      const result = await RouteService.insert(db, newTechnician, endpoint);
+      const result = await RouteService.insert(db, newWorkers, endpoint);
       res.send(result);
     } catch (error) {
       res.send(error);
     }
   });
 
-techniciansRouter
+workersRouter
   .route('/:id')
   .get(async (req, res) => {
     const { id } = req.params;
@@ -62,10 +62,10 @@ techniciansRouter
     try {
       const result = await RouteService.delete(db, id, endpoint);
       const techId = result[0]._id;
-      res.send({ message: `Deleted technician with id: ${techId}` });
+      res.send({ message: `Deleted worker with id: ${techId}` });
     } catch (error) {
       res.send(error);
     }
   });
 
-module.exports = techniciansRouter;
+module.exports = workersRouter;

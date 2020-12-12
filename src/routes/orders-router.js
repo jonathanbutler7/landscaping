@@ -1,11 +1,11 @@
 const express = require('express');
 const RouteService = require('./route-service');
 
-const endpoint = 'jobs';
-const jobsRouter = express.Router();
+const endpoint = 'orders';
+const ordersRouter = express.Router();
 const jsonParser = express.json();
 
-jobsRouter
+ordersRouter
   .route('/')
   .get(async (req, res) => {
     const db = req.app.get('db');
@@ -19,12 +19,12 @@ jobsRouter
   .post(jsonParser, async (req, res) => {
     const db = req.app.get('db');
     const { type, date_requested, zip } = req.body;
-    const newJob = {
+    const newOrder = {
       type,
       date_requested,
       zip,
     };
-    const pairs = Object.entries(newJob);
+    const pairs = Object.entries(newOrder);
     const missingParams = [];
     pairs.forEach((key) => {
       if (key[1] == null) {
@@ -32,7 +32,7 @@ jobsRouter
       }
     });
     try {
-      const result = await RouteService.insert(db, newJob, endpoint);
+      const result = await RouteService.insert(db, newOrder, endpoint);
       res.status(201).send(result);
     } catch (error) {
       if (missingParams.length > 0) {
@@ -43,7 +43,7 @@ jobsRouter
     }
   });
 
-jobsRouter
+ordersRouter
   .route('/:id')
   .all(async (req, res, next) => {
     const { id } = req.params;
@@ -54,7 +54,7 @@ jobsRouter
       next();
     } catch (error) {
       res.status(404).json({
-        error: { message: `Article with id ${id} does not exist.` },
+        error: { message: `Order with id ${id} does not exist.` },
         more: error,
       });
     }
@@ -95,4 +95,4 @@ jobsRouter
     }
   });
 
-module.exports = jobsRouter;
+module.exports = ordersRouter;

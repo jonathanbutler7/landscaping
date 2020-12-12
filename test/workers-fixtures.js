@@ -1,4 +1,4 @@
-function createTechnicians() {
+function createWorkers() {
   return [
     {
       _id: '56442348-14b4-4e17-a2e2-964440c40224',
@@ -39,4 +39,4 @@ function createTechnicians() {
   ];
 }
 
-module.exports = { createTechnicians };
+module.exports = { createWorkers };

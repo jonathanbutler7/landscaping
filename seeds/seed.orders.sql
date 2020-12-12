@@ -1,5 +1,5 @@
 INSERT INTO
-    jobs (type, date_requested, zip, items)
+    orders (type, date_requested, zip, items)
 VALUES
     (
         'power washing',

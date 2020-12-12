@@ -8,18 +8,18 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const app = express();
-const jobsRouter = require('./routes/jobs-router');
+const ordersRouter = require('./routes/orders-router');
 const customersRouter = require('./routes/customers-router');
-const techniciansRouter = require('./routes/technicians-router');
+const workersRouter = require('./routes/workers-router');
 
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 app.use(validateBearerToken);
 
-app.use('/jobs', jobsRouter);
+app.use('/orders', ordersRouter);
 app.use('/customers', customersRouter);
-app.use('/technicians', techniciansRouter);
+app.use('/workers', workersRouter);
 
 app.use(throwError);
 

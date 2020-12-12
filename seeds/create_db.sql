@@ -1,9 +1,9 @@
 -- psql -U postgres -d construction -f ./seeds/seed.jobs.sql
 DROP TABLE IF EXISTS customers;
 
-DROP TABLE IF EXISTS jobs;
+DROP TABLE IF EXISTS orders;
 
-DROP TABLE IF EXISTS technicians;
+DROP TABLE IF EXISTS workers;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -16,7 +16,7 @@ CREATE TABLE customers (
     address TEXT NOT NULL
 );
 
-CREATE TABLE jobs (
+CREATE TABLE orders (
     _id uuid DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     type TEXT NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE jobs (
     items json
 );
 
-CREATE TABLE technicians (
+CREATE TABLE workers (
     _id uuid DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     name TEXT NOT NULL,
