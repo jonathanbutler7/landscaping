@@ -91,6 +91,7 @@ context('App', () => {
   });
 
   describe(`PUT ${endpoint}/id`, () => {
+    const testData = createWorkers();
     context(`Given no articles`, () => {
       it(`Responds with 404`, () => {
         const id = 'abc';
@@ -100,20 +101,42 @@ context('App', () => {
           .expect(404, { error: `Worker with id ${id} does not exist.` });
       });
     });
-  });
-
-  describe(`PUT ${endpoint}/id`, () => {
-    context(`Given a null field`, () => {
-      it(`Responds with 404 and error message`, () => {
-        const testData = createWorkers();
-        const id = testData[0]._id;
-        const newWorker = {
-          name: null,
-        };
-        return supertest(app)
-          .put(`${endpoint}/${id}`, newWorker)
-          .set('Authorization', API_TOKEN)
-          .expect(404, { message: 'Body fields must not be null.' });
+    beforeEach(`Insert ${name}`, () => {
+      return db.into(name).insert(testData);
+    });
+    context(`PUT ${endpoint}/id`, () => {
+      describe(`Given a falsy field`, () => {
+        it(`Responds with 404 and error message`, () => {
+          const id = testData[0]._id;
+          const newWorker = {
+            name: 'Jim',
+            email: undefined,
+          };
+          return supertest(app)
+            .put(`${endpoint}/${id}`, newWorker)
+            .set('Authorization', API_TOKEN)
+            .expect(404, { message: 'Body fields must not be falsy.' });
+        });
+      });
+    });
+    context(`PUT ${endpoint}/id`, () => {
+      describe(`Given a valid PUT request`, () => {
+        it(`Responds with 200 and the new${name} object`, () => {
+          const id = testData[0]._id;
+          console.log('+++++++++', id);
+          const newWorker = {
+            name: 'John',
+          };
+          console.log(`${endpoint}/${id}`, newWorker);
+          return supertest(app)
+            .put(`${endpoint}/${id}`)
+            .send(newWorker)
+            .set('Authorization', API_TOKEN)
+            .expect(200);
+          // .expect((res) => {
+          //   expect(res.body[0].name).to.eql(newWorker.name);
+          // });
+        });
       });
     });
   });

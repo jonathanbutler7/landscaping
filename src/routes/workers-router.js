@@ -17,6 +17,7 @@ workersRouter
     }
   })
   .post(jsonParser, async (req, res) => {
+    const db = req.app.get('db');
     const { name, email, phone, address, data } = req.body;
     const newWorker = {
       name,
@@ -25,12 +26,21 @@ workersRouter
       address,
       data,
     };
-    const db = req.app.get('db');
+    const pairs = Object.entries(newWorker);
+    const missingParams = [];
+    pairs.forEach((key) => {
+      if (!key[1]) {
+        missingParams.push(key[0]);
+      }
+    });
     try {
+      if (missingParams.length > 0) {
+        throw { message: 'Body fields must not be falsy.' };
+      }
       const result = await RouteService.insert(db, newWorker, endpoint);
       res.status(201).send(result);
     } catch (error) {
-      res.status(400).send(error);
+      res.status(400).send({ error: error });
     }
   });
 
@@ -62,20 +72,13 @@ workersRouter
     const { id } = req.params;
     const { name, email, phone, address, data } = req.body;
     const newWorker = { name, email, phone, address, data };
-    const pairs = Object.entries(newWorker);
-    const missingParams = [];
-    pairs.forEach((key) => {
-      if (key[1] == null) {
-        missingParams.push(key[0]);
-      }
-    });
-    
+    const numberOfValues = Object.values(newWorker).filter(Boolean).length;
     try {
-      if (missingParams.length > 0) {
-        throw { message: 'Body fields must not be null.' };
+      if (numberOfValues === 0) {
+        throw { message: 'Body fields must not be falsy.' };
       }
       const result = await RouteService.update(db, id, newWorker, endpoint);
-      res.send(result);
+      res.status(200).send(result);
     } catch (error) {
       res.status(404).send(error);
     }
