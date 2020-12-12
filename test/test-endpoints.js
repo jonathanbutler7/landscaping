@@ -31,19 +31,19 @@ context('App', () => {
     });
 
     context(`Given there are ${name} in the database`, () => {
-      const testWorkers = createWorkers();
+      const testData = createWorkers();
       before(`Insert ${name}`, () => {
-        return db.into(name).insert(testWorkers);
+        return db.into(name).insert(testData);
       });
       it(`Responds with 200 and all of the ${name}`, () => {
         return supertest(app)
           .get(endpoint)
           .set('Authorization', API_TOKEN)
-          .expect(200, testWorkers);
+          .expect(200, testData);
       });
       it(`Responds with the specified ${name}`, () => {
         const id = '56442348-14b4-4e17-a2e2-964440c40224';
-        expectedWorker = testWorkers.filter((worker) => worker._id === id);
+        expectedWorker = testData.filter((worker) => worker._id === id);
         return supertest(app)
           .get(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
@@ -101,5 +101,6 @@ context('App', () => {
       });
     });
   });
+
   after('disconnect from db', () => db.destroy());
 });

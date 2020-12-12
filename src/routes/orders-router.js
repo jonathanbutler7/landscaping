@@ -46,8 +46,8 @@ ordersRouter
 ordersRouter
   .route('/:id')
   .all(async (req, res, next) => {
-    const { id } = req.params;
     const db = req.app.get('db');
+    const { id } = req.params;
     try {
       const result = await RouteService.getById(db, id, endpoint);
       foundJob = result;
@@ -55,7 +55,6 @@ ordersRouter
     } catch (error) {
       res.status(404).json({
         error: { message: `Order with id ${id} does not exist.` },
-        more: error,
       });
     }
   })
