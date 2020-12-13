@@ -22,14 +22,14 @@ context('Workers endpoints', () => {
 
   after('clean the table', () => db.raw('TRUNCATE customers, orders, workers'));
 
-  context(`Given there ARE NOT ${name}`, () => {
-    it('responds with 200 and an empty list', () => {
+  context(`Given there ARE NO ${name}`, () => {
+    it('GET responds with 200 and an empty list', () => {
       return supertest(app)
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, []);
     });
-    it(`responds with 404`, () => {
+    it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
       return supertest(app)
         .put(`${endpoint}/${id}`)
@@ -52,13 +52,13 @@ context('Workers endpoints', () => {
     before(`Insert ${name}`, () => {
       return db.into(name).insert(testData);
     });
-    it(`Responds with 200 and all of the ${name}`, () => {
+    it(`GET / responds with 200 and all of the ${name}`, () => {
       return supertest(app)
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, testData);
     });
-    it(`Responds with the specified ${name}`, () => {
+    it(`GET /id responds with the specified ${name}`, () => {
       const id = testData[0]._id;
       expectedWorker = testData.filter((worker) => worker._id === id);
       return supertest(app)
@@ -66,14 +66,14 @@ context('Workers endpoints', () => {
         .set('Authorization', API_TOKEN)
         .expect(200, expectedWorker);
     });
-    it(`Responds with 204 and success message`, () => {
+    it(`DELETE /id responds with 204 and success message`, () => {
       const id = testData[1]._id;
       return supertest(app)
         .delete(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(200, { message: `Deleted worker with id: ${id}` });
     });
-    context(`PUT ${endpoint}/id`, () => {
+    context(`PUT /id`, () => {
       describe(`Given a falsy field`, () => {
         it(`Responds with 404 and error message`, () => {
           const id = testData[0]._id;
