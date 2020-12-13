@@ -39,6 +39,7 @@ CREATE TABLE workers (
 
 CREATE TABLE users (
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
+    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     email TEXT NOT NULL,
     password TEXT NOT NULL,
     UNIQUE (email)
