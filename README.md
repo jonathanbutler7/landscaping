@@ -6,7 +6,7 @@ This is a databse I built with PostgreSQL and Node for a fictitious landscaping 
 
 I wanted to build a robust and secure backend to get more comfortable with PostgreSQL tables, writing tests, and building out a login feature (forthcoming).
 
-# How to clone this:
+## How to clone this:
 
 1. Clone this repository to your local machine `git clone git@github.com:jonathanbutler7/landscaping-db.git`
 2. `cd` into the cloned repository
