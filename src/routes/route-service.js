@@ -1,20 +1,21 @@
 const RouteService = {
-  getAll(knex, endpoint) {
-    return knex.select('*').from(endpoint);
+  getAll(knex, table) {
+    return knex.select('*').from(table);
   },
-  insert(knex, newItem, endpoint) {
-    return knex.insert(newItem).into(endpoint).returning('*');
+  insert(knex, newItem, table) {
+    console.log(newItem, table)
+    return knex.insert(newItem).into(table).returning('*');
   },
-  getById(knex, id, endpoint) {
-    // return knex.from(endpoint).where('_id', id).first();
-    return knex.from(endpoint).select('*').where('_id', id).returning('*');
+  getById(knex, id, table) {
+    // return knex.from(table).where('_id', id).first();
+    return knex.from(table).select('*').where('_id', id).returning('*');
   },
-  update(knex, id, body, endpoint) {
-    return knex(endpoint).where({ _id: id }).update(body).returning('*');
+  update(knex, id, body, table) {
+    return knex(table).where({ _id: id }).update(body).returning('*');
   },
-  delete(knex, id, endpoint) {
+  delete(knex, id, table) {
     console.log(id)
-    return knex(endpoint).where({ _id: id }).delete().returning('*');
+    return knex(table).where({ _id: id }).delete().returning('*');
   },
 };
 

@@ -38,12 +38,8 @@ CREATE TABLE workers (
 );
 
 CREATE TABLE users (
-    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
-    name VARCHAR(200) NOT NULL,
-    email VARCHAR(200) NOT NULL,
-    phone TEXT NOT NULL,
-    address TEXT NOT NULL,
-    password VARCHAR(200) NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
     UNIQUE (email)
 );

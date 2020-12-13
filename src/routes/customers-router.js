@@ -1,7 +1,7 @@
 const express = require('express');
 const RouteService = require('./route-service');
 
-const endpoint = 'customers';
+const table = 'customers';
 const customersRouter = express.Router();
 const jsonParser = express.json();
 
@@ -10,7 +10,7 @@ customersRouter
   .get(async (req, res) => {
     const db = req.app.get('db');
     try {
-      const result = await RouteService.getAll(db, endpoint);
+      const result = await RouteService.getAll(db, table);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -26,7 +26,7 @@ customersRouter
     };
     const db = req.app.get('db');
     try {
-      const result = await RouteService.insert(db, newTechnician, endpoint);
+      const result = await RouteService.insert(db, newTechnician, table);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -39,7 +39,7 @@ customersRouter
     const { id } = req.params;
     const db = req.app.get('db');
     try {
-      const result = await RouteService.getById(db, id, endpoint);
+      const result = await RouteService.getById(db, id, table);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -50,7 +50,7 @@ customersRouter
     const db = req.app.get('db');
     const { body } = req;
     try {
-      const result = await RouteService.update(db, id, body, endpoint);
+      const result = await RouteService.update(db, id, body, table);
       res.send(result);
     } catch (error) {
       res.send(error);
@@ -60,7 +60,7 @@ customersRouter
     const db = req.app.get('db');
     const { id } = req.params;
     try {
-      const result = await RouteService.delete(db, id, endpoint);
+      const result = await RouteService.delete(db, id, table);
       const jobId = result[0]._id;
       res.send({ message: `Deleted job with id: ${jobId}` });
     } catch (error) {
