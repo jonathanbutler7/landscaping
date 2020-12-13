@@ -21,10 +21,18 @@ loginRouter.post('/', async (req, res) => {
 
 loginRouter.get('/', async (req, res) => {
   const db = req.app.get('db');
-  const { email } = req.body;
+  const { email, password } = req.body;
   try {
     const result = await RouteService.getByEmail(db, email, table);
-    res.status(201).send(result);
+    const id = result[0]._id;
+    const token = jwt.sign({ id }, 'jwtSecret', {
+      expiresIn: 300,
+    });
+    if (await bcrypt.compare(password, result[0].password)) {
+      res.send({ auth: true, token, result });
+    } else {
+      res.send('Not Allowed');
+    }
   } catch (error) {
     res.send({ error: error });
   }
