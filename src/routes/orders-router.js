@@ -45,9 +45,7 @@ ordersRouter
       foundJob = result;
       next();
     } catch (error) {
-      res.status(404).json({
-        error: { message: `Order with id ${id} does not exist.` },
-      });
+      res.status(404).json({ error: `Order with id ${id} does not exist.` });
     }
   })
   .get(async (req, res) => {
@@ -64,9 +62,9 @@ ordersRouter
         throw { message: 'Must submit at least one field.' };
       }
       const result = await RouteService.update(db, id, newJob, table);
-      res.send(result);
+      res.status(200).send(result);
     } catch (error) {
-      res.send(error);
+      res.status(404).send(error);
     }
   })
   .delete(async (req, res) => {
