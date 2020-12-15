@@ -3,6 +3,7 @@ const knex = require('knex');
 const { API_TOKEN, DATABASE_URL } = require('../src/config');
 const { createWorkers } = require('./fixtures/workers-fixtures');
 const supertest = require('supertest');
+const { expect } = require('chai');
 const endpoint = '/workers';
 const name = 'workers';
 
@@ -84,7 +85,10 @@ context('Workers endpoints', () => {
           return supertest(app)
             .put(`${endpoint}/${id}`, newWorker)
             .set('Authorization', API_TOKEN)
-            .expect(404, { message: 'Body fields must not be falsy.' });
+            .expect(404)
+            .expect((res) => {
+              expect(res.text).to.include('Must submit at least one field');
+            });
         });
       });
       describe(`Given a valid PUT request`, () => {
@@ -116,7 +120,10 @@ context('Workers endpoints', () => {
           .post(endpoint)
           .send(newWorker)
           .set('Authorization', API_TOKEN)
-          .expect(400, { message: 'Body fields must not be falsy.' });
+          .expect(400)
+          .expect(res => {
+            expect(res.text).to.include('Body has missing fields:')
+          })
       });
     });
     describe(`Given the POST request body contains all fields`, () => {
