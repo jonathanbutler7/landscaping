@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const loginRouter = express.Router();
-const RouteService = require('./route-service');
+const RouteService = require('../route-service');
 const table = 'users';
 
 loginRouter.post('/', async (req, res) => {

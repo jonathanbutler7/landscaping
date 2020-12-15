@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const workers = require('./workers-router');
-const orders = require('./orders-router');
-const customers = require('./customers-router');
+const workers = require('./routes/workers-router');
+const orders = require('./routes/orders-router');
+const customers = require('./routes/customers-router');
 
 router.use('/workers', workers);
 router.use('/orders', orders);

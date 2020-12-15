@@ -1,13 +1,13 @@
-const app = require('../src/app');
+const app = require('../../src/app');
 const knex = require('knex');
-const { API_TOKEN, DATABASE_URL } = require('../src/config');
-const { createWorkers } = require('./fixtures/workers-fixtures');
+const { API_TOKEN, DATABASE_URL } = require('../../src/config');
+const { createCustomers } = require('../fixtures/customers-fixtures');
 const supertest = require('supertest');
 const { expect } = require('chai');
-const endpoint = '/workers';
-const name = 'workers';
+const endpoint = '/customers';
+const name = 'customers';
 
-context('Workers endpoints', () => {
+context('Customers endpoints', () => {
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -35,7 +35,7 @@ context('Workers endpoints', () => {
       return supertest(app)
         .put(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
-        .expect(404, { error: `Worker with id ${id} does not exist.` });
+        .expect(404, { error: `Customer with id ${id} does not exist.` });
     });
     describe(`DELETE ${endpoint}/id`, () => {
       it(`responds with 404`, () => {
@@ -43,13 +43,13 @@ context('Workers endpoints', () => {
         return supertest(app)
           .delete(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
-          .expect(404, { error: `Worker with id ${id} does not exist.` });
+          .expect(404, { error: `Customer with id ${id} does not exist.` });
       });
     });
   });
 
   context(`Given there ARE ${name} in the database`, () => {
-    const testData = createWorkers();
+    const testData = createCustomers();
     before(`Insert ${name}`, () => {
       return db.into(name).insert(testData);
     });
@@ -61,29 +61,29 @@ context('Workers endpoints', () => {
     });
     it(`GET /id responds with the specified ${name}`, () => {
       const id = testData[0]._id;
-      expectedWorker = testData.filter((worker) => worker._id === id);
+      expectedCustomer = testData.filter((customer) => customer._id === id);
       return supertest(app)
         .get(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
-        .expect(200, expectedWorker);
+        .expect(200, expectedCustomer);
     });
     it(`DELETE /id responds with 204 and success message`, () => {
       const id = testData[1]._id;
       return supertest(app)
         .delete(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
-        .expect(200, { message: `Deleted worker with id: ${id}` });
+        .expect(200, { message: `Deleted customer with id: ${id}` });
     });
     context(`PUT /id`, () => {
       describe(`Given a falsy field`, () => {
         it(`Responds with 404 and error message`, () => {
           const id = testData[0]._id;
-          const newWorker = {
+          const newCustomer = {
             name: 'Jim',
             email: undefined,
           };
           return supertest(app)
-            .put(`${endpoint}/${id}`, newWorker)
+            .put(`${endpoint}/${id}`, newCustomer)
             .set('Authorization', API_TOKEN)
             .expect(404)
             .expect((res) => {
@@ -92,18 +92,18 @@ context('Workers endpoints', () => {
         });
       });
       describe(`Given a valid PUT request`, () => {
-        it(`Responds with 200 and the new${name} object`, () => {
+        it(`Responds with 200 and the new ${name} object`, () => {
           const id = testData[0]._id;
-          const newWorker = {
+          const newCustomer = {
             name: 'New Joe',
           };
           return supertest(app)
             .put(`${endpoint}/${id}`)
-            .send(newWorker)
+            .send(newCustomer)
             .set('Authorization', API_TOKEN)
             .expect(200)
             .expect((res) => {
-              expect(res.body[0].name).to.eql(newWorker.name);
+              expect(res.body[0].name).to.eql(newCustomer.name);
             });
         });
       });
@@ -113,12 +113,12 @@ context('Workers endpoints', () => {
   describe(`POST to ${endpoint}`, () => {
     describe(`Given the POST is missing a field`, () => {
       it(`responds with 400 and error message`, () => {
-        const newWorker = {
+        const newCustomer = {
           name: 'John',
         };
         return supertest(app)
           .post(endpoint)
-          .send(newWorker)
+          .send(newCustomer)
           .set('Authorization', API_TOKEN)
           .expect(400)
           .expect((res) => {
@@ -128,23 +128,23 @@ context('Workers endpoints', () => {
     });
     describe(`Given the POST request body contains all fields`, () => {
       it(`creates a(n) ${name}, responds with 201, and a new ${name}`, () => {
-        const newWorker = {
+        const newCustomer = {
           name: 'Joe',
           email: 'tech@tech.com',
           phone: '123-123-1234',
-          address: '123 Orchard Avenue',
-          data: ['yard work', 'landscaping'],
+          address: '123 Orchard Avenue'
         };
         return supertest(app)
           .post(endpoint)
-          .send(newWorker)
+          .send(newCustomer)
           .set('Authorization', API_TOKEN)
           .expect(201)
           .retry(3)
           .expect((res) => {
-            expect(res.body[0].name).to.eql(newWorker.name);
-            expect(res.body[0].email).to.eql(newWorker.email);
-            expect(res.body[0].address).to.eql(newWorker.address);
+            expect(res.body[0].name).to.eql(newCustomer.name);
+            expect(res.body[0].email).to.eql(newCustomer.email);
+            expect(res.body[0].phone).to.eql(newCustomer.phone);
+            expect(res.body[0].address).to.eql(newCustomer.address);
             expect(res.body[0]).to.have.property('_id');
             const expected = new Date().toLocaleString();
             const actual = new Date(res.body[0].date_created).toLocaleString();
