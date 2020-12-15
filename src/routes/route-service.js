@@ -3,7 +3,6 @@ const RouteService = {
     return knex.select('*').from(table);
   },
   insert(knex, newItem, table) {
-    console.log(newItem, table)
     return knex.insert(newItem).into(table).returning('*');
   },
   getById(knex, id, table) {
