@@ -8,6 +8,8 @@ const endpoint = '/workers';
 const name = 'workers';
 
 context('Workers endpoints', () => {
+  const test = supertest(app);
+  
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -25,14 +27,14 @@ context('Workers endpoints', () => {
 
   context(`Given there ARE NO ${name}`, () => {
     it('GET responds with 200 and an empty list', () => {
-      return supertest(app)
+      return test
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, []);
     });
     it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
-      return supertest(app)
+      return test
         .put(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(404, { error: `Worker with id ${id} does not exist.` });
@@ -40,7 +42,7 @@ context('Workers endpoints', () => {
     describe(`DELETE ${endpoint}/id`, () => {
       it(`responds with 404`, () => {
         const id = 'abc';
-        return supertest(app)
+        return test
           .delete(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
           .expect(404, { error: `Worker with id ${id} does not exist.` });
@@ -54,7 +56,7 @@ context('Workers endpoints', () => {
       return db.into(name).insert(testData);
     });
     it(`GET / responds with 200 and all of the ${name}`, () => {
-      return supertest(app)
+      return test
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, testData);
@@ -62,14 +64,14 @@ context('Workers endpoints', () => {
     it(`GET /id responds with the specified ${name}`, () => {
       const id = testData[0]._id;
       expectedWorker = testData.filter((worker) => worker._id === id);
-      return supertest(app)
+      return test
         .get(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(200, expectedWorker);
     });
     it(`DELETE /id responds with 204 and success message`, () => {
       const id = testData[1]._id;
-      return supertest(app)
+      return test
         .delete(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(200, { message: `Deleted worker with id: ${id}` });
@@ -82,7 +84,7 @@ context('Workers endpoints', () => {
             name: 'Jim',
             email: undefined,
           };
-          return supertest(app)
+          return test
             .put(`${endpoint}/${id}`, newWorker)
             .set('Authorization', API_TOKEN)
             .expect(404)
@@ -97,7 +99,7 @@ context('Workers endpoints', () => {
           const newWorker = {
             name: 'New Joe',
           };
-          return supertest(app)
+          return test
             .put(`${endpoint}/${id}`)
             .send(newWorker)
             .set('Authorization', API_TOKEN)
@@ -116,7 +118,7 @@ context('Workers endpoints', () => {
         const newWorker = {
           name: 'John',
         };
-        return supertest(app)
+        return test
           .post(endpoint)
           .send(newWorker)
           .set('Authorization', API_TOKEN)
@@ -135,7 +137,7 @@ context('Workers endpoints', () => {
           address: '123 Orchard Avenue',
           data: ['yard work', 'landscaping'],
         };
-        return supertest(app)
+        return test
           .post(endpoint)
           .send(newWorker)
           .set('Authorization', API_TOKEN)

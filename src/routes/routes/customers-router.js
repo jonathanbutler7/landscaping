@@ -66,7 +66,6 @@ customersRouter
         throw { message: 'Must submit at least one field.' };
       }
       const result = await RouteService.update(db, id, newCustomer, table);
-      console.log(result)
       res.status(200).send(result);
     } catch (error) {
       res.status(404).send(error);

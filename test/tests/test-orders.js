@@ -8,6 +8,7 @@ const endpoint = '/orders';
 const name = 'orders';
 
 context('Orders endpoints', () => {
+  const test = supertest(app);
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -25,14 +26,14 @@ context('Orders endpoints', () => {
 
   context(`Given there ARE NO ${name}`, () => {
     it('GET responds with 200 and an empty list', () => {
-      return supertest(app)
+      return test
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, []);
     });
     it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
-      return supertest(app)
+      return test
         .put(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(404, { error: `Order with id ${id} does not exist.` });
@@ -40,7 +41,7 @@ context('Orders endpoints', () => {
     describe(`DELETE ${endpoint}/id`, () => {
       it(`responds with 404`, () => {
         const id = 'abc';
-        return supertest(app)
+        return test
           .delete(`${endpoint}/${id}`)
           .set('Authorization', API_TOKEN)
           .expect(404, { error: `Order with id ${id} does not exist.` });
@@ -54,7 +55,7 @@ context('Orders endpoints', () => {
       return db.into(name).insert(testData);
     });
     it(`GET / responds with 200 and all of the ${name}`, () => {
-      return supertest(app)
+      return test
         .get(endpoint)
         .set('Authorization', API_TOKEN)
         .expect(200, testData);
@@ -62,14 +63,14 @@ context('Orders endpoints', () => {
     it(`GET /id responds with the specified ${name}`, () => {
       const id = testData[0]._id;
       expectedWorker = testData.filter((worker) => worker._id === id);
-      return supertest(app)
+      return test
         .get(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(200, expectedWorker);
     });
     it(`DELETE /id responds with 204 and success message`, () => {
       const id = testData[1]._id;
-      return supertest(app)
+      return test
         .delete(`${endpoint}/${id}`)
         .set('Authorization', API_TOKEN)
         .expect(200, { message: `Deleted order with id: ${id}` });
@@ -82,7 +83,7 @@ context('Orders endpoints', () => {
             type: 'Gutters',
             zip: undefined,
           };
-          return supertest(app)
+          return test
             .put(`${endpoint}/${id}`, newOrder)
             .set('Authorization', API_TOKEN)
             .expect(404)
@@ -97,7 +98,7 @@ context('Orders endpoints', () => {
           const newOrder = {
             type: 'New Joe',
           };
-          return supertest(app)
+          return test
             .put(`${endpoint}/${id}`)
             .send(newOrder)
             .set('Authorization', API_TOKEN)
@@ -116,7 +117,7 @@ context('Orders endpoints', () => {
         const newOrder = {
           zip: '123456',
         };
-        return supertest(app)
+        return test
           .post(endpoint)
           .send(newOrder)
           .set('Authorization', API_TOKEN)
@@ -133,7 +134,7 @@ context('Orders endpoints', () => {
           date_requested: 'ASAP',
           zip: '76023',
         };
-        return supertest(app)
+        return test
           .post(endpoint)
           .send(newOrder)
           .set('Authorization', API_TOKEN)
