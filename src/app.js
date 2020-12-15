@@ -8,21 +8,14 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const app = express();
-const ordersRouter = require('./routes/orders-router');
-const customersRouter = require('./routes/customers-router');
-const workersRouter = require('./routes/workers-router');
-const loginRouter = require('./routes/login-router');
+const routes = require('./routes/index')
 
 app.use(morgan(morganOption));
 app.use(express.json())
 app.use(helmet());
 app.use(cors());
 app.use(validateBearerToken);
-
-app.use('/login', loginRouter);
-app.use('/orders', ordersRouter);
-app.use('/customers', customersRouter);
-app.use('/workers', workersRouter);
+app.use(routes);
 
 app.use(throwError);
 

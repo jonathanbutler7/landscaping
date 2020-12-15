@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const bcrypt = require('bcrypt');
 const loginRouter = express.Router();
 const RouteService = require('./route-service');
@@ -10,7 +9,6 @@ loginRouter.post('/', async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = { email, password: hashedPassword };
-  console.log(newUser);
   try {
     const result = await RouteService.insert(db, newUser, table);
     res.status(201).send(result);
@@ -24,14 +22,10 @@ loginRouter.get('/', async (req, res) => {
   const { email, password } = req.body;
   try {
     const result = await RouteService.getByEmail(db, email, table);
-    const id = result[0]._id;
-    const token = jwt.sign({ id }, 'jwtSecret', {
-      expiresIn: 300,
-    });
     if (await bcrypt.compare(password, result[0].password)) {
-      res.send({ auth: true, token, result });
+      res.send({ message: 'Success', auth: true });
     } else {
-      res.send('Not Allowed');
+      res.send({ message: 'Not Allowed', auth: false });
     }
   } catch (error) {
     res.send({ error: error });
@@ -49,5 +43,4 @@ loginRouter.delete('/', async (req, res) => {
   }
 });
 
-loginRouter.post('/', async (req, res) => {});
 module.exports = loginRouter;
