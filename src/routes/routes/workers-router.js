@@ -1,22 +1,21 @@
 const express = require('express');
-const RouteService = require('./route-service');
-
-const endpoint = 'workers';
+const RouteService = require('../route-service');
+const { numberOfValues, missingPostParams } = require('../helpers');
+const table = 'workers';
 const workersRouter = express.Router();
-const jsonParser = express.json();
 
 workersRouter
   .route('/')
   .get(async (req, res) => {
     const db = req.app.get('db');
     try {
-      const result = await RouteService.getAll(db, endpoint);
+      const result = await RouteService.getAll(db, table);
       res.status(200).send(result);
     } catch (error) {
       res.status(404).send(error);
     }
   })
-  .post(jsonParser, async (req, res) => {
+  .post(async (req, res) => {
     const db = req.app.get('db');
     const { name, email, phone, address, data } = req.body;
     const newWorker = {
@@ -26,18 +25,12 @@ workersRouter
       address,
       data,
     };
-    const pairs = Object.entries(newWorker);
-    const missingParams = [];
-    pairs.forEach((key) => {
-      if (!key[1]) {
-        missingParams.push(key[0]);
-      }
-    });
+    const missingParams = missingPostParams(newWorker);
     try {
       if (missingParams.length > 0) {
-        throw { message: 'Body fields must not be falsy.' };
+        throw { message: `Body has missing fields: ${missingParams}.` };
       }
-      const result = await RouteService.insert(db, newWorker, endpoint);
+      const result = await RouteService.insert(db, newWorker, table);
       res.status(201).send(result);
     } catch (error) {
       res.status(400).send(error);
@@ -50,7 +43,7 @@ workersRouter
     const db = req.app.get('db');
     const { id } = req.params;
     try {
-      const result = await RouteService.getById(db, id, endpoint);
+      const result = await RouteService.getById(db, id, table);
       foundWorker = result;
       if (!foundWorker.length) {
         throw `Worker with id ${id} does not exist.`;
@@ -63,17 +56,17 @@ workersRouter
   .get(async (req, res) => {
     res.status(200).send(foundWorker);
   })
-  .put(jsonParser, async (req, res) => {
+  .put(async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
     const { name, email, phone, address, data } = req.body;
     const newWorker = { name, email, phone, address, data };
-    const numberOfValues = Object.values(newWorker).filter(Boolean).length;
+    const checkBody = numberOfValues(newWorker);
     try {
-      if (numberOfValues === 0) {
-        throw { message: 'Body fields must not be falsy.' };
+      if (checkBody === 0) {
+        throw { message: 'Must submit at least one field.' };
       }
-      const result = await RouteService.update(db, id, newWorker, endpoint);
+      const result = await RouteService.update(db, id, newWorker, table);
       res.status(200).send(result);
     } catch (error) {
       res.status(404).send(error);
@@ -83,7 +76,7 @@ workersRouter
     const db = req.app.get('db');
     const { id } = req.params;
     try {
-      const result = await RouteService.delete(db, id, endpoint);
+      const result = await RouteService.delete(db, id, table);
       const workerId = result[0]._id;
       res.status(200).send({ message: `Deleted worker with id: ${workerId}` });
     } catch (error) {

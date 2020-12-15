@@ -1,14 +1,16 @@
--- psql -U postgres -d construction -f ./seeds/seed.jobs.sql
+-- psql -U postgres -d landscaping -f ./seeds/seed.jobs.sql
 DROP TABLE IF EXISTS customers;
 
 DROP TABLE IF EXISTS orders;
 
 DROP TABLE IF EXISTS workers;
 
+DROP TABLE IF EXISTS users;
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE customers (
-    _id uuid DEFAULT uuid_generate_v4 (),
+    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     name TEXT NOT NULL,
     email TEXT NOT NULL,
@@ -17,7 +19,7 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE orders (
-    _id uuid DEFAULT uuid_generate_v4 (),
+    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     type TEXT NOT NULL,
     date_requested TEXT NOT NULL,
@@ -26,11 +28,19 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE workers (
-    _id uuid DEFAULT uuid_generate_v4 (),
+    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     name TEXT NOT NULL,
     email TEXT NOT NULL,
     phone TEXT NOT NULL,
     address TEXT NOT NULL,
     data text []
+);
+
+CREATE TABLE users (
+    date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
+    _id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    UNIQUE (email)
 );
