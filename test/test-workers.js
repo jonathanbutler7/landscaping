@@ -121,9 +121,9 @@ context('Workers endpoints', () => {
           .send(newWorker)
           .set('Authorization', API_TOKEN)
           .expect(400)
-          .expect(res => {
-            expect(res.text).to.include('Body has missing fields:')
-          })
+          .expect((res) => {
+            expect(res.text).to.include('Body has missing fields:');
+          });
       });
     });
     describe(`Given the POST request body contains all fields`, () => {

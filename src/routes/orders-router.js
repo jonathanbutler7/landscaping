@@ -1,9 +1,8 @@
 const express = require('express');
 const RouteService = require('./route-service');
-
+const { numberOfValues, missingPostParams } = require('./helpers');
 const table = 'orders';
 const ordersRouter = express.Router();
-const jsonParser = express.json();
 
 ordersRouter
   .route('/')
@@ -16,7 +15,7 @@ ordersRouter
       res.status(404).send(error);
     }
   })
-  .post(jsonParser, async (req, res) => {
+  .post(async (req, res) => {
     const db = req.app.get('db');
     const { type, date_requested, zip } = req.body;
     const newOrder = {
@@ -24,22 +23,15 @@ ordersRouter
       date_requested,
       zip,
     };
-    const pairs = Object.entries(newOrder);
-    const missingParams = [];
-    pairs.forEach((key) => {
-      if (key[1] == null) {
-        missingParams.push(key[0]);
-      }
-    });
+    const missingParams = missingPostParams(newOrder);
     try {
+      if (missingParams.length > 0) {
+        throw { message: `Body has missing fields: ${missingParams}.` };
+      }
       const result = await RouteService.insert(db, newOrder, table);
       res.status(201).send(result);
     } catch (error) {
-      if (missingParams.length > 0) {
-        res
-          .status(400)
-          .send({ message: `Missing '${missingParams}' in request body` });
-      }
+      res.status(400).send(error);
     }
   });
 
@@ -61,21 +53,16 @@ ordersRouter
   .get(async (req, res) => {
     res.status(201).send(foundJob);
   })
-  .put(jsonParser, async (req, res) => {
+  .put(async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
     const { type, date_requested, zip } = req.body;
     const newJob = { type, date_requested, zip };
-    const numOfVals = Object.values(newJob).filter(Boolean).length;
-    if (numOfVals === 0) {
-      res.status(400).json({
-        error: {
-          message:
-            "Request body must contain either 'type', 'date_requested' or 'zip'",
-        },
-      });
-    }
+    const checkBody = numberOfValues(newJob);
     try {
+      if (checkBody === 0) {
+        throw { message: 'Must submit at least one field.' };
+      }
       const result = await RouteService.update(db, id, newJob, table);
       res.send(result);
     } catch (error) {
@@ -87,10 +74,10 @@ ordersRouter
     const { id } = req.params;
     try {
       const result = await RouteService.delete(db, id, table);
-      const jobId = result[0]._id;
-      res.status(204).send({ message: `Deleted job with id: ${jobId}` });
+      const orderId = result[0]._id;
+      res.status(204).send({ message: `Deleted order with id: ${orderId}` });
     } catch (error) {
-      res.send(error);
+      res.status(404).send({ message: `Worker with ${id} does not exist` });
     }
   });
 
