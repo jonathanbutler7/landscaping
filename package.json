@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/setup.js test/test-orders.js",
+    "test": "mocha test/setup.js test/tests/test-orders.js",
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "start": "node src/server.js",

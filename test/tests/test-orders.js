@@ -95,7 +95,7 @@ context('Orders endpoints', () => {
         it(`Responds with 200 and the new${name} object`, () => {
           const id = testData[0]._id;
           const newOrder = {
-            name: 'New Joe',
+            type: 'New Joe',
           };
           return supertest(app)
             .put(`${endpoint}/${id}`)

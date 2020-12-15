@@ -6,20 +6,7 @@ function createOrders() {
       type: "power washing",
       date_requested: "December 10",
       zip: "76101",
-      items: [
-        {
-          material: "wood",
-          measurement: 200,
-          units: "sqft",
-          name: "deck",
-        },
-        {
-          name: "deck",
-          material: "plastic",
-          units: "sqft",
-          measurement: 302,
-        }
-      ]
+      items: {}
     },
     {
       _id: "1e7bac54-f9f5-4b27-a050-8779b6b6bd1d",
@@ -27,18 +14,7 @@ function createOrders() {
       type: "fencing",
       date_requested: "December 10",
       zip: "76020",
-      items: [
-        {
-          dsad: 1,
-          second: 2,
-        },
-        {
-          sdsad: 34.6,
-        },
-        {
-          sdsad: 23,
-        }
-      ]
+      items: {}
     },
     {
       _id: "212505cb-47e7-456e-b6b4-11e545ed0ad5",
@@ -46,17 +22,7 @@ function createOrders() {
       type: "cabinets",
       date_requested: "December 10",
       zip: "76550",
-      items: [
-        {
-          dsad: 1,
-        },
-        {
-          sdsad: 34.6,
-        },
-        {
-          sdsad: 23,
-        }
-      ]
+      items: {}
     },
     {
       _id: "5b0876a6-cd3c-40d2-8b99-328510be8aed",
@@ -64,17 +30,7 @@ function createOrders() {
       type: "tiny homes",
       date_requested: "December 10",
       zip: "76600",
-      items: [
-        {
-          dsad: 1,
-        },
-        {
-          sdsad: 34.6,
-        },
-        {
-          sdsad: 23,
-        }
-      ]
+      items: {}
     },
     {
       _id: "5047f433-2e88-4d14-941d-9b21d9242850",
@@ -82,17 +38,7 @@ function createOrders() {
       type: "railing",
       date_requested: "December 10",
       zip: "76765",
-      items: [
-        {
-          dsad: 1,
-        },
-        {
-          sdsad: 34.6,
-        },
-        {
-          sdsad: 23,
-        }
-      ]
+      items: {}
     }
   ];
 }

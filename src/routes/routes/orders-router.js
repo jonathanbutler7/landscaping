@@ -49,7 +49,7 @@ ordersRouter
     }
   })
   .get(async (req, res) => {
-    res.status(201).send(foundOrder);
+    res.status(200).send(foundOrder);
   })
   .put(async (req, res) => {
     const db = req.app.get('db');
@@ -73,7 +73,7 @@ ordersRouter
     try {
       const result = await RouteService.delete(db, id, table);
       const orderId = result[0]._id;
-      res.status(204).send({ message: `Deleted order with id: ${orderId}` });
+      res.status(200).send({ message: `Deleted order with id: ${orderId}` });
     } catch (error) {
       res.status(404).send({ message: `Worker with ${id} does not exist` });
     }
