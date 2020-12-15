@@ -4,7 +4,11 @@ This is a boilerplate project used for starting new projects!
 
 ## What is this?
 
-This is a database I built with PostgreSQL and Node for a fictitious landscaping company, Los Angeles Landscaping & Gardening. The database has three endpoints, `/customers`, `/workers`, and `/orders`. It will serve as the backend for a fullstack project which includes a modern landing page (which captures customer info for `/customers`), a customer-facing order page where customers may view services and pricing and place an order (`/orders`), and a worker-facing order page where workers may view orders currently in the database.
+This is a database I am building with PostgreSQL and Node for a fictitious landscaping company, Los Angeles Landscaping & Gardening. The database has four endpoints, `/customers`, `/workers`, and `/orders`, and `/login`. 
+
+It will serve as the backend for a fullstack project which includes a modern landing page (which captures customer info for `/customers`), a customer-facing order page where customers may view services and pricing and place an order (`/orders`), and a worker-facing order page where workers may view orders currently in the database.
+
+The `/login` endpoint will store encrypted passwords for each customer and worker and will use JWT to authenticate sessions.
 
 1. Clone this repository to your local machine `git clone git@github.com:jonathanbutler7/landscaping-db.git`
 2. `cd` into the cloned repository
