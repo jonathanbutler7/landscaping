@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/tests/test-orders.js test/tests/test-customers.js test/tests/test-workers.js",
+    "test": "mocha test/tests/test-orders.js test/tests/test-customers.js test/tests/test-workers.js test/tests/test-helpers.js",
     "test-helpers": "mocha test/tests/test-helpers.js",
-    "coverage": "nyc --reporter=text mocha test/tests/test-orders.js test/tests/test-customers.js test/tests/test-workers.js",
+    "coverage": "nyc --reporter=text mocha test/tests/test-orders.js test/tests/test-customers.js test/tests/test-workers.js test/tests/test-helpers.js",
     "dev": "nodemon src/server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "start": "node src/server.js",

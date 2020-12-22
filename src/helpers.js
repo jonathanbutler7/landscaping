@@ -1,4 +1,4 @@
-const { API_TOKEN } = require('./config');
+const { API_TOKEN, NODE_ENV } = require('./config');
 
 function validateBearerToken(req, res, next) {
   const apiToken = API_TOKEN;
@@ -14,8 +14,7 @@ function throwError(error, res) {
   if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } };
   } else {
-    console.error(error);
-    response = { message: error.message, error };
+    response = { message: error.toString() };
   }
   res.status(500).json(response);
 }
