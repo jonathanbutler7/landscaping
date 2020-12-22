@@ -60,7 +60,7 @@ customersRouter
     const { id } = req.params;
     const { name, email, phone, address } = req.body;
     const newCustomer = { name, email, phone, address };
-    const checkBody = numberOfValues(newCustomer)
+    const checkBody = numberOfValues(newCustomer);
     try {
       if (checkBody === 0) {
         throw { message: 'Must submit at least one field.' };

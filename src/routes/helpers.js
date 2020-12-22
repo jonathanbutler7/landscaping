@@ -14,4 +14,8 @@ function missingPostParams(newObject) {
   return missingParams;
 }
 
-module.exports = { numberOfValues, missingPostParams };
+function hello(val) {
+  return val;
+}
+
+module.exports = { numberOfValues, missingPostParams, hello };

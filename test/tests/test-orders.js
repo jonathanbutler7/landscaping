@@ -26,10 +26,7 @@ context('Orders endpoints', () => {
 
   context(`Given there ARE NO ${name}`, () => {
     it('GET responds with 200 and an empty list', () => {
-      return test
-        .get(endpoint)
-        .set('Authorization', API_TOKEN)
-        .expect(200, []);
+      return test.get(endpoint).set('Authorization', API_TOKEN).expect(200, []);
     });
     it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
@@ -139,7 +136,7 @@ context('Orders endpoints', () => {
           .send(newOrder)
           .set('Authorization', API_TOKEN)
           .expect(201)
-          .retry(3)
+          .retry(5)
           .expect((res) => {
             expect(res.body[0].type).to.eql(newOrder.type);
             expect(res.body[0].date_requested).to.eql(newOrder.date_requested);

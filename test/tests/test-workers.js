@@ -9,7 +9,7 @@ const name = 'workers';
 
 context('Workers endpoints', () => {
   const test = supertest(app);
-  
+
   let db = knex({
     client: 'pg',
     connection: DATABASE_URL,
@@ -27,10 +27,7 @@ context('Workers endpoints', () => {
 
   context(`Given there ARE NO ${name}`, () => {
     it('GET responds with 200 and an empty list', () => {
-      return test
-        .get(endpoint)
-        .set('Authorization', API_TOKEN)
-        .expect(200, []);
+      return test.get(endpoint).set('Authorization', API_TOKEN).expect(200, []);
     });
     it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
@@ -142,7 +139,7 @@ context('Workers endpoints', () => {
           .send(newWorker)
           .set('Authorization', API_TOKEN)
           .expect(201)
-          .retry(3)
+          .retry(5)
           .expect((res) => {
             expect(res.body[0].name).to.eql(newWorker.name);
             expect(res.body[0].email).to.eql(newWorker.email);

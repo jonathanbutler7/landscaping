@@ -27,10 +27,7 @@ context('Customers endpoints', () => {
 
   context(`Given there ARE NO ${name}`, () => {
     it('GET responds with 200 and an empty list', () => {
-      return test
-        .get(endpoint)
-        .set('Authorization', API_TOKEN)
-        .expect(200, []);
+      return test.get(endpoint).set('Authorization', API_TOKEN).expect(200, []);
     });
     it(`PUT responds with 404 and error message`, () => {
       const id = 'abc';
@@ -134,14 +131,14 @@ context('Customers endpoints', () => {
           name: 'Joe',
           email: 'tech@tech.com',
           phone: '123-123-1234',
-          address: '123 Orchard Avenue'
+          address: '123 Orchard Avenue',
         };
         return test
           .post(endpoint)
           .send(newCustomer)
           .set('Authorization', API_TOKEN)
           .expect(201)
-          .retry(3)
+          .retry(5)
           .expect((res) => {
             expect(res.body[0].name).to.eql(newCustomer.name);
             expect(res.body[0].email).to.eql(newCustomer.email);
