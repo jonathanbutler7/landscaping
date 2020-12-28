@@ -4,7 +4,7 @@ import { useLandscaping } from '../LandingPage/context';
 
 export default function OrderForm() {
   const [showForm, setShowForm] = useState(false);
-  const { serverUrl, authKey, newCustomer } = useLandscaping();
+  const { newCustomer } = useLandscaping();
 
   return (
     <div>

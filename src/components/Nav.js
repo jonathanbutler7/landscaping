@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Nav() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+    <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
       <h2>
         {' '}
         <a href='#customer'>Customer</a>{' '}
@@ -15,6 +15,6 @@ export default function Nav() {
         {' '}
         <a href='#customer'>Worker</a>{' '}
       </h2>
-    </div>
+    </nav>
   );
 }

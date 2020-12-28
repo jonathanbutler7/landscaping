@@ -6,8 +6,8 @@ function App() {
   return (
     <div>
       <Header />
-      {services.map((service) => (
-        <LandingPage service={service} />
+      {services.map((service, i) => (
+        <LandingPage key={i} service={service} />
       ))}
     </div>
   );
