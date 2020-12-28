@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-const { REACT_APP_SERVER_URL, REACT_APP_AUTH_KEY } = process.env;
+import { useLandscaping } from '../context';
 
 export default function CustomerForm() {
+  const { serverUrl, authKey, setNewCustomer } = useLandscaping();
   const [customer, setCustomer] = useState({});
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState(null);
   function handleChange(e) {
     let newCustomer = customer;
     newCustomer[e.target.name] = e.target.value;
@@ -25,9 +26,9 @@ export default function CustomerForm() {
   }
 
   async function handleSubmit(e) {
-    let url = `${REACT_APP_SERVER_URL}/customers`;
+    let url = `${serverUrl}/customers`;
     var myHeaders = new Headers();
-    myHeaders.append('Authorization', REACT_APP_AUTH_KEY);
+    myHeaders.append('Authorization', authKey);
     myHeaders.append('Content-Type', 'application/json');
     var raw = JSON.stringify(customer);
 
@@ -40,11 +41,12 @@ export default function CustomerForm() {
       const response = await fetch(url, options);
       const result = await response.json();
       setMessage(`Successfully created customer ${result._id}`);
+      setNewCustomer(result);
     } catch (error) {
       setMessage(error.status);
     }
   }
-  console.log(message);
+
   return (
     <div>
       <h3>Customer form</h3>
