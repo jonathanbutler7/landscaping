@@ -1,20 +1,28 @@
 import LandingPage from './LandingPage/LandingPage';
 import Header from './components/Header';
 import Nav from './components/Nav';
+import CreateWorker from './CreateWorker/CreateWorker';
+import CreateOrder from './CreateOrder/CreateOrder';
 import { Route } from 'react-router-dom';
 import { services } from './services';
-
+import { LandscapingProvider } from './LandingPage/context';
 function App() {
   return (
-    <div>
+    <LandscapingProvider>
       <Header />
       <Nav />
+      <Route path='/worker'>
+        <CreateWorker />
+      </Route>
+      <Route path='/order'>
+        <CreateOrder />
+      </Route>
       {services.map((service, i) => (
         <Route key={i} path={`/${service.name}`}>
           <LandingPage key={i} service={service} />
         </Route>
       ))}
-    </div>
+    </LandscapingProvider>
   );
 }
 

@@ -5,7 +5,7 @@ export default function Nav() {
     <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
       <h2>
         {' '}
-        <Link to='/customer'>Customer</Link>{' '}
+        <Link to='/gutters'>Landing Page</Link>{' '}
       </h2>
       <h2>
         {' '}
