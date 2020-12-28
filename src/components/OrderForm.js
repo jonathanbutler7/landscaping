@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import CreateOrder from './CreateOrder';
-import { useLandscaping } from '../context';
+import React, { useState } from 'react';
+import CreateOrder from '../LandingPage/components/CreateOrder';
+import { useLandscaping } from '../LandingPage/context';
 
 export default function OrderForm() {
   const [showForm, setShowForm] = useState(false);
-  const { serverUrl, authKey, newCustomer } = useLandscaping();
-  useEffect(() => {
-    if (newCustomer) {
-      const { name, address, phone, email } = newCustomer;
-    }
-  });
+  const { newCustomer } = useLandscaping();
+
   return (
     <div>
       <h3>Order form</h3>

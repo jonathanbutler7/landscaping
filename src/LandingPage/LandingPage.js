@@ -1,17 +1,13 @@
 import React from 'react';
-import Header from './components/Header';
 import CustomerForm from './components/CustomerForm';
-import OrderForm from './components/OrderForm';
-import WorkerForm from './components/WorkerForm';
 import { LandscapingProvider } from './context';
 
-export default function LandingPage() {
+export default function LandingPage({ service }) {
   return (
     <LandscapingProvider>
-      <Header />
+      <h1>{service.name} services</h1>
+      <p>{service.description} services</p>
       <CustomerForm />
-      <OrderForm />
-      <WorkerForm />
     </LandscapingProvider>
   );
 }
