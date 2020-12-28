@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLandscaping } from '../context';
+import { validateCustomer } from '../helpers/helpers';
 
 export default function CustomerForm() {
   const { serverUrl, authKey, setNewCustomer } = useLandscaping();
@@ -13,12 +14,7 @@ export default function CustomerForm() {
 
   function handleValidate(e) {
     e.preventDefault();
-    if (
-      !customer.name ||
-      !customer.email ||
-      !customer.phone ||
-      !customer.address
-    ) {
+    if (!validateCustomer(customer)) {
       setMessage('All fields are required.');
     } else {
       handleSubmit(e);

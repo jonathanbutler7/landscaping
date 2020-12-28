@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLandscaping } from '../context';
+import { validateOrder } from '../helpers/helpers';
 import { types } from '../store/store';
 
 export default function CreateOrder() {
@@ -15,15 +16,14 @@ export default function CreateOrder() {
   }
 
   function handleValidate(e) {
-    console.log(order);
     e.preventDefault();
-    if (!order.type || !order.date_requested || !order.zip || !order.items) {
+    if (!validateOrder(order)) {
       setMessage('All fields are required.');
     } else {
       handleSubmit(e);
     }
   }
-  console.log(order);
+  
   async function handleSubmit(e) {
     let url = `${serverUrl}/orders`;
     var myHeaders = new Headers();
@@ -47,37 +47,37 @@ export default function CreateOrder() {
   }
 
   return (
-    <div>
-      <h3>order form</h3>
-      <form action='' onSubmit={handleValidate}>
-        <label htmlFor=''>Type:</label>
-        <select onChange={(e) => handleChange(e)} name='type' id=''>
-          {types.map((type, i) => (
-            <option value={type}>{type}</option>
-          ))}
-        </select>
-        <br />
-        <label htmlFor=''>Date requested:</label>
-        <input
-          onChange={(e) => handleChange(e)}
-          name='date_requested'
-          type='date'
-        />
-        <br />
-        <label htmlFor=''>Zip:</label>
-        <input
-          onChange={(e) => handleChange(e)}
-          name='zip'
-          type='text'
-          defaultValue={newCustomer ? newCustomer.address : ''}
-        />
-        <br />
-        <label htmlFor=''>Items:</label>
-        <input onChange={(e) => handleChange(e)} name='items' type='text' />
-        <br />
-        {message && <p>{message}</p>}
-        <button type='submit'>Submit</button>
-      </form>
-    </div>
+    <form action='' onSubmit={handleValidate}>
+      <label htmlFor=''>Type:</label>
+      <select onChange={(e) => handleChange(e)} name='type' id=''>
+        <option value=''>Select an option</option>
+        {types.map((type, i) => (
+          <option key={i} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
+      <br />
+      <label htmlFor=''>Date requested:</label>
+      <input
+        onChange={(e) => handleChange(e)}
+        name='date_requested'
+        type='date'
+      />
+      <br />
+      <label htmlFor=''>Zip:</label>
+      <input
+        onChange={(e) => handleChange(e)}
+        name='zip'
+        type='text'
+        defaultValue={newCustomer ? newCustomer.address : ''}
+      />
+      <br />
+      <label htmlFor=''>Items:</label>
+      <input onChange={(e) => handleChange(e)} name='items' type='text' />
+      <br />
+      {message && <p>{message}</p>}
+      <button type='submit'>Submit</button>
+    </form>
   );
 }
