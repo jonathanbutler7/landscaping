@@ -9,7 +9,6 @@ export default function CreateOrder() {
   const [message, setMessage] = useState(null);
 
   function handleChange(e) {
-    console.log(e.target.value, e.target.name);
     let newOrder = order;
     newOrder[e.target.name] = e.target.value;
     setOrder(newOrder);
@@ -23,7 +22,7 @@ export default function CreateOrder() {
       handleSubmit(e);
     }
   }
-  
+
   async function handleSubmit(e) {
     let url = `${serverUrl}/orders`;
     var myHeaders = new Headers();

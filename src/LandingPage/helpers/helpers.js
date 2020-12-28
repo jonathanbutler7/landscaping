@@ -7,9 +7,7 @@ export function validateWorker(worker) {
     !worker.services
   )
     return false;
-  else {
-    return true;
-  }
+  return true;
 }
 
 export function validateOrder(order) {
@@ -21,7 +19,5 @@ export function validateOrder(order) {
 export function validateCustomer(customer) {
   if (!customer.name || !customer.email || !customer.phone || !customer.address)
     return false;
-  else {
-    return true;
-  }
+  return true;
 }

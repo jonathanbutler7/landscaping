@@ -1,17 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
+import Header from '../components/Header';
 import CustomerForm from './components/CustomerForm';
-import OrderForm from './components/OrderForm';
-import WorkerForm from './components/WorkerForm';
+import Nav from '../components/Nav';
 import { LandscapingProvider } from './context';
 
-export default function LandingPage() {
+export default function LandingPage({ service }) {
   return (
     <LandscapingProvider>
-      <Header />
+      <h1>{service} services</h1>
       <CustomerForm />
-      <OrderForm />
-      <WorkerForm />
     </LandscapingProvider>
   );
 }

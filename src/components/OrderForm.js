@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CreateOrder from './CreateOrder';
-import { useLandscaping } from '../context';
+import CreateOrder from '../LandingPage/components/CreateOrder';
+import { useLandscaping } from '../LandingPage/context';
 
 export default function OrderForm() {
   const [showForm, setShowForm] = useState(false);
