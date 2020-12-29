@@ -7,7 +7,7 @@ export default function LandingPage({ service }) {
   return (
     <>
       <h1>{service.name} services</h1>
-      <p>{service.description} services</p>
+      <p>{service.description}</p>
       <CustomerForm />
     </>
   );

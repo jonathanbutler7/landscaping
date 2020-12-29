@@ -6,7 +6,7 @@ import OrderForm from './CreateOrder/OrderForm';
 import { Route } from 'react-router-dom';
 import { services } from './services';
 import { LandscapingProvider } from './LandingPage/context';
-console.log(services)
+
 function App() {
   return (
     <LandscapingProvider>
@@ -16,8 +16,7 @@ function App() {
       <Route path='/order' component={OrderForm} />
       {services.map((service, i) => (
         <Route key={i} path={`/${service.name}`}>
-          {/* <LandingPage key={i} service={service} /> */}
-          <div>hi</div>
+          <LandingPage key={i} service={service} />
         </Route>
       ))}
     </LandscapingProvider>
