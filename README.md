@@ -8,9 +8,14 @@ It will serve as the backend for a fullstack project which includes
 
 1. A customer-facing landing page where customers may enter contact details and place an order and 
 2. A worker-facing page for workers to view orders the customers have placed.
+
 ## Why build this?
 
-I wanted to build a robust and secure backend to get more comfortable with PostgreSQL tables and writing tests with Mocha.
+I wanted to build a robust and secure backend to 
+
+1. Practice working with databases and tables in PostgreSQL,
+2. Get more familiar with writing tests with Mocha, and
+3. Implement best practices with folder structure and clean code.
 
 ## How to clone this:
 
