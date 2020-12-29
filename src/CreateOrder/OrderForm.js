@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CreateOrder from '../LandingPage/components/CreateOrder';
+import CreateOrder from './CreateOrder';
 import { useLandscaping } from '../LandingPage/context';
 
 export default function OrderForm() {

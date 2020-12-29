@@ -13,7 +13,7 @@ export default function Nav() {
       </h2>
       <h2>
         {' '}
-        <Link to='/worker'>Worker</Link>{' '}
+        <Link to='/worker'>Worker</Link>
       </h2>
     </nav>
   );
