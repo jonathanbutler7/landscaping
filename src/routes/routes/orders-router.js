@@ -24,7 +24,6 @@ ordersRouter
       zip,
       items,
     };
-    console.log(newOrder);
     const missingParams = missingPostParams(newOrder);
     try {
       if (missingParams.length > 0) {

@@ -130,6 +130,20 @@ context('Orders endpoints', () => {
           type: 'Mowing',
           date_requested: 'ASAP',
           zip: '76023',
+          items: [
+            {
+              material: 'wood',
+              measurement: 200,
+              units: 'sqft',
+              name: 'deck',
+            },
+            {
+              material: 'wood',
+              measurement: 200,
+              units: 'sqft',
+              name: 'deck',
+            },
+          ],
         };
         return test
           .post(endpoint)
