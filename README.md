@@ -17,21 +17,6 @@ I wanted to build a robust and secure backend to
 2. Get more familiar with writing tests with Mocha, and
 3. Implement best practices with folder structure and clean code.
 
-## How to clone this:
-
-1. Clone this repository to your local machine `git clone git@github.com:jonathanbutler7/landscaping-db.git`
-2. `cd` into the cloned repository
-3. Install the node dependencies `npm install`
-
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-See test coverage `npm run coverage`
 ## Folder Structure
 ```
 ├── src
@@ -82,3 +67,18 @@ All files             |   95.65 |       80 |     100 |   95.65 |
   workers-router.js   |   94.12 |    83.33 |     100 |   94.12 | 15,49,83          
 ----------------------|---------|----------|---------|---------|-------------------
 ```
+## How to clone this:
+
+1. Clone this repository to your local machine `git clone git@github.com:jonathanbutler7/landscaping-db.git`
+2. `cd` into the cloned repository
+3. Install the node dependencies `npm install`
+
+## Scripts
+
+Start the application `npm start`
+
+Start nodemon for the application `npm run dev`
+
+Run the tests `npm test`
+
+See test coverage `npm run coverage`
