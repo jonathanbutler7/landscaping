@@ -15,10 +15,12 @@ export default function CreateOrder() {
       sqft: 100,
       trimming: 'weed eating',
     };
-    setAreas([...areas, newItem]);
-    let newOrder = { ...order, items: [...areas] };
+    let newAreas = [...areas, newItem];
+    setAreas(newAreas);
+    let newOrder = { ...order, items: newAreas };
     setOrder(newOrder);
   }
+
   function handleChange(e) {
     let newOrder = order;
     newOrder[e.target.name] = e.target.value;
@@ -36,7 +38,6 @@ export default function CreateOrder() {
   }
 
   async function handleSubmit(e) {
-    console.log(order);
     let url = `${serverUrl}/orders`;
     var myHeaders = new Headers();
     myHeaders.append('Authorization', authKey);
@@ -50,7 +51,6 @@ export default function CreateOrder() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       setMessage(`Successfully created order ${result._id}`);
     } catch (error) {
       setMessage(error.status);
