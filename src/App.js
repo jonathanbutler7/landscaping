@@ -6,20 +6,18 @@ import OrderForm from './CreateOrder/OrderForm';
 import { Route } from 'react-router-dom';
 import { services } from './services';
 import { LandscapingProvider } from './LandingPage/context';
+console.log(services)
 function App() {
   return (
     <LandscapingProvider>
       <Header />
       <Nav />
-      <Route path='/worker'>
-        <CreateWorker />
-      </Route>
-      <Route path='/order'>
-        <OrderForm />
-      </Route>
+      <Route path='/worker' component={CreateWorker} />
+      <Route path='/order' component={OrderForm} />
       {services.map((service, i) => (
         <Route key={i} path={`/${service.name}`}>
-          <LandingPage key={i} service={service} />
+          {/* <LandingPage key={i} service={service} /> */}
+          <div>hi</div>
         </Route>
       ))}
     </LandscapingProvider>
