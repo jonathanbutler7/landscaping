@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
-import { useLandscaping } from '../context';
-import { validateOrder } from '../helpers/helpers';
-import { types } from '../store/store';
+import { useLandscaping } from '../LandingPage/context';
+import { validateOrder } from '../LandingPage/helpers/helpers';
+import { types } from '../LandingPage/store/store';
 
 export default function CreateOrder() {
   const { serverUrl, authKey, newCustomer } = useLandscaping();
   const [order, setOrder] = useState({});
   const [message, setMessage] = useState(null);
+  const [areas, setAreas] = useState([]);
+
+  function addItem() {
+    let newItem = {
+      area: 'front yard',
+      sqft: 100,
+      trimming: 'weed eating',
+    };
+    let newAreas = [...areas, newItem];
+    setAreas(newAreas);
+    let newOrder = { ...order, items: newAreas };
+    setOrder(newOrder);
+  }
 
   function handleChange(e) {
     let newOrder = order;
     newOrder[e.target.name] = e.target.value;
+
     setOrder(newOrder);
   }
 
@@ -29,7 +43,6 @@ export default function CreateOrder() {
     myHeaders.append('Authorization', authKey);
     myHeaders.append('Content-Type', 'application/json');
     var raw = JSON.stringify(order);
-
     var options = {
       method: 'POST',
       headers: myHeaders,
@@ -38,7 +51,6 @@ export default function CreateOrder() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       setMessage(`Successfully created order ${result._id}`);
     } catch (error) {
       setMessage(error.status);
@@ -72,10 +84,16 @@ export default function CreateOrder() {
         defaultValue={newCustomer ? newCustomer.address : ''}
       />
       <br />
-      <label htmlFor=''>Items:</label>
-      <input onChange={(e) => handleChange(e)} name='items' type='text' />
-      <br />
+      {areas.map((item, i) => (
+        <div key={i} style={{ border: '1px solid black' }}>
+          <p>{item.area}</p>
+          <p>{item.sqft}</p>
+          <p>{item.trimming}</p>
+        </div>
+      ))}
+      <button onClick={() => addItem()}>Add an area</button>
       {message && <p>{message}</p>}
+      {/* area, sq ft, date, weed eating/trimming */}
       <button type='submit'>Submit</button>
     </form>
   );

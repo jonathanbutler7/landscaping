@@ -10,6 +10,7 @@ export function LandscapingProvider({ children }) {
   const [newCustomer, setNewCustomer] = useState(null);
   let serverUrl = REACT_APP_SERVER_URL;
   const authKey = REACT_APP_AUTH_KEY;
+  
   const value = {
     serverUrl,
     authKey,

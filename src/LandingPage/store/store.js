@@ -1,3 +1,3 @@
-const types = ['landscaping', 'gutters', 'yard work']
+const types = ['landscaping', 'gutters', 'yard work'];
 
 export { types };

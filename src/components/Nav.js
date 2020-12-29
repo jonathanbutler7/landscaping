@@ -1,19 +1,19 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default function Nav() {
   return (
     <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
       <h2>
         {' '}
-        <a href='#customer'>Customer</a>{' '}
+        <Link to='/gutters'>Landing Page</Link>{' '}
       </h2>
       <h2>
         {' '}
-        <a href='#customer'>Order</a>{' '}
+        <Link to='/order'>Order</Link>{' '}
       </h2>
       <h2>
         {' '}
-        <a href='#customer'>Worker</a>{' '}
+        <Link to='/worker'>Worker</Link>
       </h2>
     </nav>
   );
