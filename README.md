@@ -1,6 +1,6 @@
 ## What is this?
 
-This is a database I am building with PostgreSQL and Node for a fictitious landscaping company, **Los Angeles Landscaping & Gardening**. 
+This is a database built with PostgreSQL, Node.js, and Express for a fictitious landscaping company, **Los Angeles Landscaping & Gardening**. 
 
 The database has three endpoints, `/customers`, `/workers`, and `/orders`. 
 
