@@ -17,12 +17,14 @@ ordersRouter
   })
   .post(async (req, res) => {
     const db = req.app.get('db');
-    const { type, date_requested, zip } = req.body;
+    const { type, date_requested, zip, items } = req.body;
     const newOrder = {
       type,
       date_requested,
       zip,
+      items,
     };
+    console.log(newOrder);
     const missingParams = missingPostParams(newOrder);
     try {
       if (missingParams.length > 0) {

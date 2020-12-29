@@ -23,3 +23,34 @@ Start the application `npm start`
 Start nodemon for the application `npm run dev`
 
 Run the tests `npm test`
+## Folder Structure
+```
+├── src
+│   ├── Procfile
+│   ├── app.js
+│   ├── config.js
+│   ├── helpers.js
+│   ├── routes
+│   │   ├── helpers.js
+│   │   ├── index.js
+│   │   ├── route-service.js
+│   │   └── routes
+│   │       ├── customers-router.js
+│   │       ├── login-router.js
+│   │       ├── orders-router.js
+│   │       └── workers-router.js
+│   └── server.js
+└── test
+    ├── app.spec.js
+    ├── fixtures
+    │   ├── customers-fixtures.js
+    │   ├── orders-fixtures.js
+    │   └── workers-fixtures.js
+    ├── setup.js
+    └── tests
+        ├── test-customers.js
+        ├── test-helpers.js
+        ├── test-orders.js
+        └── test-workers.js
+
+```
