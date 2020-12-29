@@ -30,7 +30,7 @@ ordersRouter
         throw { message: `Body has missing fields: ${missingParams}.` };
       }
       const result = await RouteService.insert(db, newOrder, table);
-      res.status(201).send(result);
+      res.status(201).send(result[0]);
     } catch (error) {
       res.status(400).send(error);
     }

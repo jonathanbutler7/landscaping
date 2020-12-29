@@ -152,12 +152,12 @@ context('Orders endpoints', () => {
           .expect(201)
           .retry(5)
           .expect((res) => {
-            expect(res.body[0].type).to.eql(newOrder.type);
-            expect(res.body[0].date_requested).to.eql(newOrder.date_requested);
-            expect(res.body[0].zip).to.eql(newOrder.zip);
-            expect(res.body[0]).to.have.property('_id');
+            expect(res.body.type).to.eql(newOrder.type);
+            expect(res.body.date_requested).to.eql(newOrder.date_requested);
+            expect(res.body.zip).to.eql(newOrder.zip);
+            expect(res.body).to.have.property('_id');
             const expected = new Date().toLocaleString();
-            const actual = new Date(res.body[0].date_created).toLocaleString();
+            const actual = new Date(res.body.date_created).toLocaleString();
             expect(actual).to.eql(expected);
           });
       });
