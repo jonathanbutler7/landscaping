@@ -5,8 +5,6 @@ DROP TABLE IF EXISTS orders;
 
 DROP TABLE IF EXISTS workers;
 
-DROP TABLE IF EXISTS users;
-
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE customers (
