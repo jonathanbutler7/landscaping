@@ -1,12 +1,16 @@
 ## What is this?
 
-This is a database I am building with PostgreSQL and Node for a fictitious landscaping company, **Los Angeles Landscaping & Gardening**. The database has four endpoints, `/customers`, `/workers`, and `/orders`. 
+This is a database I am building with PostgreSQL and Node for a fictitious landscaping company, **Los Angeles Landscaping & Gardening**. 
 
-It will serve as the backend for a fullstack project which includes a modern landing page (which captures customer info for `/customers`), a customer-facing order page where customers may view services and pricing and then place an order (`/orders`), and a worker-facing order page where workers may view orders currently in the database.
+The database has three endpoints, `/customers`, `/workers`, and `/orders`. 
 
+It will serve as the backend for a fullstack project which includes 
+
+1. A customer-facing landing page where customers may enter contact details and place an order and 
+2. A worker-facing page for workers to view orders the customers have placed.
 ## Why build this?
 
-I wanted to build a robust and secure backend to get more comfortable with PostgreSQL tables, writing tests, and building out a login feature (forthcoming).
+I wanted to build a robust and secure backend to get more comfortable with PostgreSQL tables and writing tests with Mocha.
 
 ## How to clone this:
 
@@ -56,7 +60,7 @@ Run the tests `npm test`
 ----------------------|---------|----------|---------|---------|-------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ----------------------|---------|----------|---------|---------|-------------------
-All files             |   94.71 |    76.67 |     100 |   94.71 |                   
+All files             |   95.65 |       80 |     100 |   95.65 |                   
  src                  |   96.67 |    66.67 |     100 |   96.67 |                   
   app.js              |     100 |       50 |     100 |     100 | 4                 
   config.js           |     100 |       50 |     100 |     100 | 2-3               
@@ -65,9 +69,9 @@ All files             |   94.71 |    76.67 |     100 |   94.71 |
   helpers.js          |     100 |      100 |     100 |     100 |                   
   index.js            |     100 |      100 |     100 |     100 |                   
   route-service.js    |     100 |      100 |     100 |     100 |                   
- src/routes/routes    |   93.42 |    81.25 |     100 |   93.42 |                   
+ src/routes/routes    |    94.7 |     87.5 |     100 |    94.7 |                   
   customers-router.js |   94.12 |    83.33 |     100 |   94.12 | 15,48,84          
-  orders-router.js    |      92 |       75 |     100 |      92 | 15,33-34,80       
+  orders-router.js    |   95.92 |      100 |     100 |   95.92 | 15,79             
   workers-router.js   |   94.12 |    83.33 |     100 |   94.12 | 15,49,83          
 ----------------------|---------|----------|---------|---------|-------------------
 ```
