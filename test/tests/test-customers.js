@@ -140,13 +140,13 @@ context('Customers endpoints', () => {
           .expect(201)
           .retry(5)
           .expect((res) => {
-            expect(res.body[0].name).to.eql(newCustomer.name);
-            expect(res.body[0].email).to.eql(newCustomer.email);
-            expect(res.body[0].phone).to.eql(newCustomer.phone);
-            expect(res.body[0].address).to.eql(newCustomer.address);
-            expect(res.body[0]).to.have.property('_id');
+            expect(res.body.name).to.eql(newCustomer.name);
+            expect(res.body.email).to.eql(newCustomer.email);
+            expect(res.body.phone).to.eql(newCustomer.phone);
+            expect(res.body.address).to.eql(newCustomer.address);
+            expect(res.body).to.have.property('_id');
             const expected = new Date().toLocaleString();
-            const actual = new Date(res.body[0].date_created).toLocaleString();
+            const actual = new Date(res.body.date_created).toLocaleString();
             expect(actual).to.eql(expected);
           });
       });

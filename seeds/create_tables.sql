@@ -22,7 +22,7 @@ CREATE TABLE orders (
     type TEXT NOT NULL,
     date_requested TEXT NOT NULL,
     zip TEXT NOT NULL,
-    items json
+    items json []
 );
 
 CREATE TABLE workers (
