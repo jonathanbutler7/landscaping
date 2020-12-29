@@ -34,7 +34,6 @@ Run the tests `npm test`
 │   │   ├── route-service.js
 │   │   └── routes
 │   │       ├── customers-router.js
-│   │       ├── login-router.js
 │   │       ├── orders-router.js
 │   │       └── workers-router.js
 │   └── server.js
@@ -50,5 +49,4 @@ Run the tests `npm test`
         ├── test-helpers.js
         ├── test-orders.js
         └── test-workers.js
-
 ```
