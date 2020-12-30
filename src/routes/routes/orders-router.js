@@ -17,12 +17,13 @@ ordersRouter
   })
   .post(async (req, res) => {
     const db = req.app.get('db');
-    const { type, date_requested, zip, items } = req.body;
+    const { type, date_requested, zip, items, status } = req.body;
     const newOrder = {
       type,
       date_requested,
       zip,
       items,
+      status,
     };
     const missingParams = missingPostParams(newOrder);
     try {
@@ -55,8 +56,8 @@ ordersRouter
   .put(async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
-    const { type, date_requested, zip } = req.body;
-    const newOrder = { type, date_requested, zip };
+    const { type, date_requested, zip, status } = req.body;
+    const newOrder = { type, date_requested, zip, status };
     const checkBody = numberOfValues(newOrder);
     try {
       if (checkBody === 0) {

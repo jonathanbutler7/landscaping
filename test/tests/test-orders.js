@@ -130,6 +130,7 @@ context('Orders endpoints', () => {
           type: 'Mowing',
           date_requested: 'ASAP',
           zip: '76023',
+          status: 'available',
           items: [
             {
               material: 'wood',
@@ -153,6 +154,7 @@ context('Orders endpoints', () => {
           .retry(5)
           .expect((res) => {
             expect(res.body.type).to.eql(newOrder.type);
+            expect(res.body.status).to.eql(newOrder.status);
             expect(res.body.date_requested).to.eql(newOrder.date_requested);
             expect(res.body.zip).to.eql(newOrder.zip);
             expect(res.body).to.have.property('_id');

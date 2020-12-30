@@ -6,6 +6,7 @@ function createOrders() {
       type: 'power washing',
       date_requested: 'December 10',
       zip: '76101',
+      status: 'available',
       items: [
         {
           material: 'wood',
@@ -27,6 +28,7 @@ function createOrders() {
       type: 'fencing',
       date_requested: 'December 10',
       zip: '76020',
+      status: 'available',
       items: [
         {
           material: 'wood',
@@ -48,6 +50,7 @@ function createOrders() {
       type: 'cabinets',
       date_requested: 'December 10',
       zip: '76550',
+      status: 'done',
       items: [
         {
           material: 'wood',
@@ -69,6 +72,7 @@ function createOrders() {
       type: 'tiny homes',
       date_requested: 'December 10',
       zip: '76600',
+      status: 'claimed',
       items: [
         {
           material: 'wood',
@@ -90,6 +94,7 @@ function createOrders() {
       type: 'railing',
       date_requested: 'December 10',
       zip: '76765',
+      status: 'available',
       items: [
         {
           material: 'wood',
