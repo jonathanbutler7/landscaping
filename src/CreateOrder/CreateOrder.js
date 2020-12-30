@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useLandscaping } from '../LandingPages/context';
-import { validateOrder } from '../LandingPages/helpers/helpers';
+import { postNewThing, validateOrder } from '../LandingPages/helpers/helpers';
 import { types } from '../LandingPages/store/store';
-var axios = require('axios');
+
 
 export default function CreateOrder() {
-  const { serverUrl, authKey, newCustomer } = useLandscaping();
+  const { authKey, newCustomer } = useLandscaping();
   const [order, setOrder] = useState({});
   const [message, setMessage] = useState(null);
   const [areas, setAreas] = useState([]);
@@ -39,21 +39,9 @@ export default function CreateOrder() {
   }
 
   async function handleSubmit(e) {
-    let url = `${serverUrl}/orders`;
-    var data = { ...order, status: 'available' };
-    var config = {
-      headers: {
-        Authorization: authKey,
-        'Content-Type': 'application/json',
-      },
-    };
-    try {
-      let promise = await axios.post(url, data, config);
-      let result = promise.data;
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
+    var newOrder = { ...order, status: 'available' };
+    const result = await postNewThing('orders', newOrder, authKey);
+    console.log(result);
   }
 
   return (
