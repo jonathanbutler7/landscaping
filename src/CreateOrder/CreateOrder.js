@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useLandscaping } from '../LandingPage/context';
-import { validateOrder } from '../LandingPage/helpers/helpers';
-import { types } from '../LandingPage/store/store';
+import { useLandscaping } from '../LandingPages/context';
+import { postNewThing, validateOrder } from '../LandingPages/helpers/helpers';
+import { types } from '../LandingPages/store/store';
+
 
 export default function CreateOrder() {
-  const { serverUrl, authKey, newCustomer } = useLandscaping();
+  const { authKey, newCustomer } = useLandscaping();
   const [order, setOrder] = useState({});
   const [message, setMessage] = useState(null);
   const [areas, setAreas] = useState([]);
@@ -38,23 +39,9 @@ export default function CreateOrder() {
   }
 
   async function handleSubmit(e) {
-    let url = `${serverUrl}/orders`;
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', authKey);
-    myHeaders.append('Content-Type', 'application/json');
-    var raw = JSON.stringify(order);
-    var options = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-    };
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      setMessage(`Successfully created order ${result._id}`);
-    } catch (error) {
-      setMessage(error.status);
-    }
+    var newOrder = { ...order, status: 'available' };
+    const result = await postNewThing('orders', newOrder, authKey);
+    console.log(result);
   }
 
   return (
@@ -84,6 +71,7 @@ export default function CreateOrder() {
         defaultValue={newCustomer ? newCustomer.address : ''}
       />
       <br />
+      <div onClick={() => addItem()}>Add an area</div>
       {areas.map((item, i) => (
         <div key={i} style={{ border: '1px solid black' }}>
           <p>{item.area}</p>
@@ -91,9 +79,7 @@ export default function CreateOrder() {
           <p>{item.trimming}</p>
         </div>
       ))}
-      <button onClick={() => addItem()}>Add an area</button>
       {message && <p>{message}</p>}
-      {/* area, sq ft, date, weed eating/trimming */}
       <button type='submit'>Submit</button>
     </form>
   );

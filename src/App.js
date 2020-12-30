@@ -1,11 +1,11 @@
-import LandingPage from './LandingPage/LandingPage';
+import LandingPages from './LandingPages/LandingPages';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import CreateWorker from './CreateWorker/CreateWorker';
 import OrderForm from './CreateOrder/OrderForm';
 import { Route } from 'react-router-dom';
 import { services } from './services';
-import { LandscapingProvider } from './LandingPage/context';
+import { LandscapingProvider } from './LandingPages/context';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
       <Route path='/order' component={OrderForm} />
       {services.map((service, i) => (
         <Route key={i} path={`/${service.name}`}>
-          <LandingPage key={i} service={service} />
+          <LandingPages key={i} service={service} />
         </Route>
       ))}
     </LandscapingProvider>
