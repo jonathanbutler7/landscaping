@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLandscaping } from '../LandingPages/context';
 import { validateOrder } from '../LandingPages/helpers/helpers';
 import { types } from '../LandingPages/store/store';
+var axios = require('axios');
 
 export default function CreateOrder() {
   const { serverUrl, authKey, newCustomer } = useLandscaping();
@@ -39,22 +40,23 @@ export default function CreateOrder() {
 
   async function handleSubmit(e) {
     let url = `${serverUrl}/orders`;
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', authKey);
-    myHeaders.append('Content-Type', 'application/json');
-    var raw = JSON.stringify(order);
-    var options = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
+    var data = JSON.stringify({ ...order, status: 'available' });
+    var config = {
+      method: 'post',
+      url: url,
+      headers: {
+        Authorization: authKey,
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify({ ...order, status: 'available' }),
     };
+
     try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      console.log(result)
-      setMessage(`Successfully created order ${result._id}`);
+      let promise = await axios(config);
+      let result = promise.data;
+      console.log(result);
     } catch (error) {
-      setMessage(error.status);
+      console.error(error);
     }
   }
 
@@ -92,7 +94,7 @@ export default function CreateOrder() {
           <p>{item.trimming}</p>
         </div>
       ))}
-      <button onClick={() => addItem()}>Add an area</button>
+      <div onClick={() => addItem()}>Add an area</div>
       {message && <p>{message}</p>}
       {/* area, sq ft, date, weed eating/trimming */}
       <button type='submit'>Submit</button>
