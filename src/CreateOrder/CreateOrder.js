@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useLandscaping } from '../LandingPage/context';
-import { validateOrder } from '../LandingPage/helpers/helpers';
-import { types } from '../LandingPage/store/store';
+import { useLandscaping } from '../LandingPages/context';
+import { validateOrder } from '../LandingPages/helpers/helpers';
+import { types } from '../LandingPages/store/store';
 
 export default function CreateOrder() {
   const { serverUrl, authKey, newCustomer } = useLandscaping();
@@ -51,6 +51,7 @@ export default function CreateOrder() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      console.log(result)
       setMessage(`Successfully created order ${result._id}`);
     } catch (error) {
       setMessage(error.status);

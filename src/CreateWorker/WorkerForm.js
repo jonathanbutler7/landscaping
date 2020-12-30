@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { types } from '../LandingPage/store/store';
-import { useLandscaping } from '../LandingPage/context';
-import { validateWorker } from '../LandingPage/helpers/helpers';
+import { types } from '../LandingPages/store/store';
+import { useLandscaping } from '../LandingPages/context';
+import { validateWorker } from '../LandingPages/helpers/helpers';
 
 export default function WorkerForm() {
   const { serverUrl, authKey } = useLandscaping();
