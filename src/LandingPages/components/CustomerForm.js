@@ -5,7 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 
-export default function CustomerForm() {
+export default function CustomerForm({ service }) {
   const { authKey, mapKey } = useLandscaping();
   const [customer, setCustomer] = useState({});
   const [message, setMessage] = useState(null);
@@ -53,7 +53,7 @@ export default function CustomerForm() {
 
   return (
     <div>
-      <h3>Enter your details to be taken to an order page.</h3>
+      <h3>Enter your details to place an order for {service}.</h3>
       <form action='' onSubmit={handleValidate}>
         <label htmlFor=''>Name:</label>
         <input onChange={(e) => handleChange(e)} name='name' type='text' />
@@ -71,12 +71,7 @@ export default function CustomerForm() {
           style={{ width: 300 }}
           onInputChange={(e) => searchAddress(e)}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label='Combo box'
-              variant='outlined'
-              onInputChange={(e) => searchAddress(e)}
-            />
+            <TextField {...params} label='Combo box' variant='outlined' />
           )}
         />
         <br />
