@@ -40,19 +40,15 @@ export default function CreateOrder() {
 
   async function handleSubmit(e) {
     let url = `${serverUrl}/orders`;
-    var data = JSON.stringify({ ...order, status: 'available' });
+    var data = { ...order, status: 'available' };
     var config = {
-      method: 'post',
-      url: url,
       headers: {
         Authorization: authKey,
         'Content-Type': 'application/json',
       },
-      data: JSON.stringify({ ...order, status: 'available' }),
     };
-
     try {
-      let promise = await axios(config);
+      let promise = await axios.post(url, data, config);
       let result = promise.data;
       console.log(result);
     } catch (error) {
@@ -87,6 +83,7 @@ export default function CreateOrder() {
         defaultValue={newCustomer ? newCustomer.address : ''}
       />
       <br />
+      <div onClick={() => addItem()}>Add an area</div>
       {areas.map((item, i) => (
         <div key={i} style={{ border: '1px solid black' }}>
           <p>{item.area}</p>
@@ -94,9 +91,7 @@ export default function CreateOrder() {
           <p>{item.trimming}</p>
         </div>
       ))}
-      <div onClick={() => addItem()}>Add an area</div>
       {message && <p>{message}</p>}
-      {/* area, sq ft, date, weed eating/trimming */}
       <button type='submit'>Submit</button>
     </form>
   );
