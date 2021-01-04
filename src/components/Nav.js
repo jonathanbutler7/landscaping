@@ -6,7 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 
-
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -58,8 +57,8 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {options.map((option) => (
-          <Link to={`/${option}`}>
+        {options.map((option, key) => (
+          <Link to={`/${option}`} key={key}>
             <StyledMenuItem>
               <ListItemText primary={option} />
             </StyledMenuItem>
@@ -69,7 +68,7 @@ export default function CustomizedMenus() {
       <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
         <h2>
           {' '}
-          <Link onClick={handleClick}>
+          <Link to='' onClick={handleClick}>
             <Button color='primary' variant='outlined'>
               Landing page
             </Button>

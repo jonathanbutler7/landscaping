@@ -32,9 +32,8 @@ export default function Header() {
             aria-label='menu'
           ></IconButton>
           <Typography variant='h1' className={classes.title}>
-            LA landscaping and gardening
+            🏡 LA Landscaping and gardening
           </Typography>
-          <Button color='inherit'>Login</Button>
         </Toolbar>
       </AppBar>
     </header>
