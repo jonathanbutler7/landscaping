@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
+
 
 const StyledMenu = withStyles({
   paper: {
@@ -67,15 +69,27 @@ export default function CustomizedMenus() {
       <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
         <h2>
           {' '}
-          <Link onClick={handleClick}>Landing Page</Link>{' '}
+          <Link onClick={handleClick}>
+            <Button color='primary' variant='outlined'>
+              Landing page
+            </Button>
+          </Link>{' '}
         </h2>
         <h2>
           {' '}
-          <Link to='/order'>Order</Link>{' '}
+          <Link to='/order'>
+            <Button color='primary' variant='outlined'>
+              Order page
+            </Button>
+          </Link>{' '}
         </h2>
         <h2>
           {' '}
-          <Link to='/worker'>Worker</Link>
+          <Link to='/worker'>
+            <Button color='primary' variant='outlined'>
+              Worker page
+            </Button>
+          </Link>
         </h2>
       </nav>
     </div>

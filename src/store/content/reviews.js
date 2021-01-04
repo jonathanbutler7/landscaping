@@ -1,7 +1,7 @@
 const reviews = [
   {
     subject: 'Amazing service!',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Joanna F.',
@@ -9,7 +9,7 @@ const reviews = [
   },
   {
     subject: 'Highly recommended',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Hal R.',
@@ -17,7 +17,7 @@ const reviews = [
   },
   {
     subject: 'Convenient process',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Pass C.',
@@ -25,7 +25,7 @@ const reviews = [
   },
   {
     subject: 'Attentive to my needs',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Jose G.',
@@ -33,7 +33,7 @@ const reviews = [
   },
   {
     subject: 'Above and beyond',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Monica C.',
@@ -41,7 +41,7 @@ const reviews = [
   },
   {
     subject: 'Great communication',
-    review:
+    title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
     rating: 5,
     name: 'Vinny B.',
