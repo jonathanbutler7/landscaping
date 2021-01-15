@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { types } from '../LandingPages/store/store';
-import { useLandscaping } from '../LandingPages/context';
-import { validateWorker } from '../LandingPages/helpers/helpers';
+import { types } from '../LandingPage/store/index';
+import { useLandscaping } from '../LandingPage/context';
+import { validateWorker } from '../LandingPage/helpers/helpers';
 
 export default function WorkerForm() {
   const { serverUrl, authKey } = useLandscaping();
@@ -11,6 +11,7 @@ export default function WorkerForm() {
   function handleChange(e) {
     let newWorker = worker;
     newWorker[e.target.name] = e.target.value;
+    console.log(newWorker);
     setWorker(newWorker);
   }
 
@@ -28,8 +29,14 @@ export default function WorkerForm() {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', authKey);
     myHeaders.append('Content-Type', 'application/json');
-    var raw = JSON.stringify(worker);
-
+    let newWorker = {
+      address: worker.address,
+      email: worker.email,
+      name: worker.name,
+      phone: worker.phone,
+      services: [worker.services],
+    };
+    var raw = JSON.stringify(newWorker);
     var options = {
       method: 'POST',
       headers: myHeaders,
@@ -39,7 +46,6 @@ export default function WorkerForm() {
       const response = await fetch(url, options);
       const result = await response.json();
       setMessage(`Successfully created worker ${result._id}`);
-      // setNewWorker(result);
     } catch (error) {
       setMessage(error.status);
     }
@@ -62,7 +68,7 @@ export default function WorkerForm() {
         <input onChange={(e) => handleChange(e)} name='address' type='text' />
         <br />
         <label htmlFor=''>Services:</label>
-        <select onChange={(e) => handleChange(e)} name='type' id=''>
+        <select onChange={(e) => handleChange(e)} name='services' id=''>
           <option value=''>Select an option</option>
           {types.map((type, i) => (
             <option key={i} value={type}>

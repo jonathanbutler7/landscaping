@@ -1,11 +1,11 @@
-import LandingPages from './LandingPages/LandingPages';
+import LandingPages from './LandingPage/LandingPages';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import CreateWorker from './CreateWorker/CreateWorker';
 import OrderForm from './CreateOrder/OrderForm';
 import { Route } from 'react-router-dom';
 import { services } from './services';
-import { LandscapingProvider } from './LandingPages/context';
+import { LandscapingProvider } from './LandingPage/context';
 
 function App() {
   return (

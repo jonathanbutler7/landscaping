@@ -132,7 +132,7 @@ context('Workers endpoints', () => {
           email: 'tech@tech.com',
           phone: '123-123-1234',
           address: '123 Orchard Avenue',
-          data: ['yard work', 'landscaping'],
+          services: ['yard work', 'landscaping'],
         };
         return test
           .post(endpoint)

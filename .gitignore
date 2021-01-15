@@ -6,8 +6,9 @@
 /.pnp
 .pnp.js
 .eslintcache
-/backend/.eslintcache
-/backend/.eslintrc.json
+./backend/.eslintcache
+.nyc_output
+./backend/.eslintrc.json
 # testing
 /coverage
 

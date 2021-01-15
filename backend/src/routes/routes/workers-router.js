@@ -17,13 +17,14 @@ workersRouter
   })
   .post(async (req, res) => {
     const db = req.app.get('db');
-    const { name, email, phone, address, data } = req.body;
+    const { name, email, phone, address, services } = req.body;
+    console.log(req.body)
     const newWorker = {
       name,
       email,
       phone,
       address,
-      data,
+      services,
     };
     const missingParams = missingPostParams(newWorker);
     try {
@@ -59,8 +60,8 @@ workersRouter
   .put(async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.params;
-    const { name, email, phone, address, data } = req.body;
-    const newWorker = { name, email, phone, address, data };
+    const { name, email, phone, address, services } = req.body;
+    const newWorker = { name, email, phone, address, services };
     const checkBody = numberOfValues(newWorker);
     try {
       if (checkBody === 0) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useLandscaping } from '../LandingPages/context';
-import { postNewThing, validateOrder } from '../LandingPages/helpers/helpers';
-import { types } from '../LandingPages/store/store';
+import { useLandscaping } from '../LandingPage/context';
+import { postNewThing, validateOrder } from '../LandingPage/helpers/helpers';
+import { types } from '../LandingPage/store/index';
 
 
 export default function CreateOrder() {

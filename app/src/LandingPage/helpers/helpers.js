@@ -6,7 +6,7 @@ export function validateWorker(worker) {
     !worker.email ||
     !worker.phone ||
     !worker.address ||
-    !worker.services
+    !worker.type
   )
     return false;
   return true;
@@ -23,10 +23,11 @@ export function validateCustomer(customer) {
     return false;
   return true;
 }
-const serverUrl = 'http://localhost:9000';
+const serverUrl = 'http://localhost:3000';
 
 export async function postNewThing(endpoint, thing, authKey) {
   let url = `${serverUrl}/${endpoint}`;
+  console.log(url)
   var config = {
     headers: {
       Authorization: authKey,

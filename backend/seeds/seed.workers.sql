@@ -1,5 +1,5 @@
 INSERT INTO
-    workers (name, email, phone, address, data)
+    workers (name, email, phone, address, services)
 VALUES
     (
         'Joe',
