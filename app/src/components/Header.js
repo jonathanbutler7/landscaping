@@ -31,7 +31,7 @@ export default function Header() {
             color='inherit'
             aria-label='menu'
           ></IconButton>
-          <Typography variant='h1' className={classes.title}>
+          <Typography variant='h4' className={classes.title}>
             🏡 LA Landscaping and gardening
           </Typography>
         </Toolbar>

@@ -3,7 +3,6 @@ import { useLandscaping } from '../LandingPage/context';
 import { postNewThing, validateOrder } from '../LandingPage/helpers/helpers';
 import { types } from '../LandingPage/store/index';
 
-
 export default function CreateOrder() {
   const { authKey, newCustomer } = useLandscaping();
   const [order, setOrder] = useState({});
@@ -31,15 +30,23 @@ export default function CreateOrder() {
 
   function handleValidate(e) {
     e.preventDefault();
-    if (!validateOrder(order)) {
-      setMessage('All fields are required.');
-    } else {
+    if (validateOrder(order)) {
       handleSubmit(e);
+    } else {
+      setMessage('All fields are required.');
     }
   }
 
   async function handleSubmit(e) {
-    var newOrder = { ...order, status: 'available' };
+    const newOrder = { ...order, status: 'available' };
+    // {
+    //   type,
+    //   date_requested,
+    //   zip,
+    //   items,
+    //   status,
+    // }
+    console.log(newOrder)
     const result = await postNewThing('orders', newOrder, authKey);
     console.log(result);
   }

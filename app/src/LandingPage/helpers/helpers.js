@@ -6,7 +6,7 @@ export function validateWorker(worker) {
     !worker.email ||
     !worker.phone ||
     !worker.address ||
-    !worker.type
+    !worker.services
   )
     return false;
   return true;
@@ -23,7 +23,7 @@ export function validateCustomer(customer) {
     return false;
   return true;
 }
-const serverUrl = 'http://localhost:3000';
+const serverUrl = 'http://localhost:8000';
 
 export async function postNewThing(endpoint, thing, authKey) {
   let url = `${serverUrl}/${endpoint}`;

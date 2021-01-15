@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { types } from '../LandingPage/store/index';
 import { useLandscaping } from '../LandingPage/context';
-import { validateWorker } from '../LandingPage/helpers/helpers';
+import { validateWorker, postNewThing } from '../LandingPage/helpers/helpers';
 
 export default function WorkerForm() {
-  const { serverUrl, authKey } = useLandscaping();
+  const { authKey } = useLandscaping();
   const [worker, setWorker] = useState({});
   const [message, setMessage] = useState(null);
 
   function handleChange(e) {
     let newWorker = worker;
-    newWorker[e.target.name] = e.target.value;
-    console.log(newWorker);
+    if (e.target.name === 'services') {
+      newWorker[e.target.name] = [e.target.value];
+    } else {
+      newWorker[e.target.name] = e.target.value;
+    }
     setWorker(newWorker);
   }
 
@@ -25,30 +28,8 @@ export default function WorkerForm() {
   }
 
   async function handleSubmit(e) {
-    let url = `${serverUrl}/workers`;
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', authKey);
-    myHeaders.append('Content-Type', 'application/json');
-    let newWorker = {
-      address: worker.address,
-      email: worker.email,
-      name: worker.name,
-      phone: worker.phone,
-      services: [worker.services],
-    };
-    var raw = JSON.stringify(newWorker);
-    var options = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-    };
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      setMessage(`Successfully created worker ${result._id}`);
-    } catch (error) {
-      setMessage(error.status);
-    }
+    const result = await postNewThing('workers', worker, authKey);
+    setMessage(`Successfully created worker with id: ${result._id}`);
   }
 
   return (

@@ -18,7 +18,6 @@ workersRouter
   .post(async (req, res) => {
     const db = req.app.get('db');
     const { name, email, phone, address, services } = req.body;
-    console.log(req.body)
     const newWorker = {
       name,
       email,
