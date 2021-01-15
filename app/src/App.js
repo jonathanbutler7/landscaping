@@ -1,4 +1,4 @@
-import LandingPages from './LandingPage/LandingPages';
+import LandingPage from './LandingPage/LandingPage';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import CreateWorker from './CreateWorker/CreateWorker';
@@ -16,7 +16,7 @@ function App() {
       <Route path='/order' component={OrderForm} />
       {services.map((service, i) => (
         <Route key={i} path={`/${service.name}`}>
-          <LandingPages key={i} service={service} />
+          <LandingPage key={i} service={service} />
         </Route>
       ))}
     </LandscapingProvider>

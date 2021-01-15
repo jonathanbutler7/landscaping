@@ -11,7 +11,7 @@ export function LandscapingProvider({ children }) {
   let serverUrl = REACT_APP_SERVER_URL;
   const authKey = REACT_APP_AUTH_KEY;
   const mapKey = REACT_APP_MAPQUEST_KEY;
-    console.log(process.env)
+
   const value = {
     serverUrl,
     authKey,
