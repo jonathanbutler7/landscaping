@@ -2,7 +2,7 @@ import React from 'react';
 import CustomerForm from './components/CustomerForm';
 import CustomerReviews from './components/CustomerReviews';
 import Footer from './components/Footer';
-import { img1 } from '../store/assets/index'
+import { img1 } from '../store/index'
 
 export default function LandingPage({ service }) {
   return (

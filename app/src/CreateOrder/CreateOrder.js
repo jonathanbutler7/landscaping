@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLandscaping } from '../LandingPage/context';
 import { postNewThing, validateOrder } from '../LandingPage/helpers/helpers';
-import { types } from '../LandingPage/store/index';
+import { services } from '../store/index';
 
 export default function CreateOrder() {
   const { authKey, newCustomer } = useLandscaping();
@@ -56,9 +56,9 @@ export default function CreateOrder() {
       <label htmlFor=''>Type:</label>
       <select onChange={(e) => handleChange(e)} name='type' id=''>
         <option value=''>Select an option</option>
-        {types.map((type, i) => (
-          <option key={i} value={type}>
-            {type}
+        {services.map(({name}, i) => (
+          <option key={i} value={name}>
+            {name}
           </option>
         ))}
       </select>

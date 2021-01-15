@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { types } from '../LandingPage/store/index';
+import { services } from '../store/index';
 import { useLandscaping } from '../LandingPage/context';
 import { validateWorker, postNewThing } from '../LandingPage/helpers/helpers';
 
@@ -51,9 +51,9 @@ export default function WorkerForm() {
         <label htmlFor=''>Services:</label>
         <select onChange={(e) => handleChange(e)} name='services' id=''>
           <option value=''>Select an option</option>
-          {types.map((type, i) => (
-            <option key={i} value={type}>
-              {type}
+          {services.map(({name}, i) => (
+            <option key={i} value={name}>
+              {name}
             </option>
           ))}
         </select>

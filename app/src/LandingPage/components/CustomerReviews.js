@@ -1,5 +1,5 @@
 import React from 'react';
-import { reviews } from '../../store/content/index';
+import { reviews } from '../../store/index';
 export default function CustomerReviews() {
   return (
     <div>

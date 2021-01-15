@@ -4,7 +4,7 @@ import Nav from './components/Nav';
 import CreateWorker from './CreateWorker/CreateWorker';
 import OrderForm from './CreateOrder/OrderForm';
 import { Route } from 'react-router-dom';
-import { services } from './services';
+import { services } from './store/index';
 import { LandscapingProvider } from './LandingPage/context';
 
 function App() {
