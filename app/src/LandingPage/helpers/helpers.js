@@ -1,4 +1,5 @@
 import axios from 'axios';
+const { REACT_APP_SERVER_URL } = process.env;
 
 export function validateWorker(worker) {
   if (
@@ -23,11 +24,9 @@ export function validateCustomer(customer) {
     return false;
   return true;
 }
-const serverUrl = 'http://localhost:8000';
 
 export async function postNewThing(endpoint, thing, authKey) {
-  let url = `${serverUrl}/${endpoint}`;
-  console.log(url)
+  let url = `${REACT_APP_SERVER_URL}/${endpoint}`;
   var config = {
     headers: {
       Authorization: authKey,

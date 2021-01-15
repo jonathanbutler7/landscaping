@@ -12,7 +12,7 @@ const StyledMenu = withStyles({
   },
 })((props) => (
   <Menu
-    elevation={0}
+    elevation={1}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
@@ -44,13 +44,14 @@ export default function CustomizedMenus() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const options = ['mowing', 'gardening', 'landscaping'];
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+  // const options = ['mowing', 'gardening', 'landscaping'];
+
   return (
     <div>
-      <StyledMenu
+      {/* <StyledMenu
         id='customized-menu'
         anchorEl={anchorEl}
         keepMounted
@@ -64,11 +65,11 @@ export default function CustomizedMenus() {
             </StyledMenuItem>
           </Link>
         ))}
-      </StyledMenu>
+      </StyledMenu> */}
       <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
         <h2>
           {' '}
-          <Link to='' onClick={handleClick}>
+          <Link to='/landscaping' onClick={handleClick}>
             <Button color='primary' variant='outlined'>
               Landing page
             </Button>
