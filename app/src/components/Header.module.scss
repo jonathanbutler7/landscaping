@@ -10,6 +10,7 @@
     }
 }
 
+
 .left,
 .right {
     display: flex;
@@ -17,14 +18,40 @@
 }
 
 .right {
+    display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
+
+    .hamburger {
+        display: none;
+    }
 
     svg {
         width: 2rem;
         height: 2rem;
         padding: 1rem;
         color: #3f3f3f;
+    }
+}
+
+.menuContent {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+@media only screen and (max-width: 1280px) {
+    .right {
+        .hamburger {
+            display: flex;
+            color: #3f3f3f;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .menuContent {
+            display: none;
+        }
     }
 }
