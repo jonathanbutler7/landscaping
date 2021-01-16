@@ -41,6 +41,16 @@ button:hover, svg:hover {
   cursor: pointer;
 }
 
+input {
+  border: 1px solid #3f3f3f;
+  margin: 1rem;
+  padding: .5rem;
+  border-radius: .2rem;
+}
+label, select {
+  margin: 1rem;
+}
+
 .button {
   border: 1px solid var(--button-blue);
   background: #2399da;

@@ -64,7 +64,7 @@ export default function WorkerForm() {
         </select>
         <br />
         {message && <p>{message}</p>}
-        <button className='button' type='submit'>
+        <button className='dark-button' type='submit'>
           Submit
         </button>
       </form>

@@ -84,7 +84,7 @@ export default function CreateOrder() {
       <button className='light-button' onClick={() => addItem()}>
         Add an area
       </button>
-      <button className='button' type='submit'>
+      <button className='dark-button' type='submit'>
         Submit
       </button>
     </form>
