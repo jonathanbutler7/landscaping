@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { AiOutlinePlus } from '../store/index';
 
 const useStyles = makeStyles({
   list: {
@@ -28,13 +29,13 @@ export default function TemporaryDrawer({ drawer, setDrawer }) {
     ) {
       return;
     }
-    setState(anchor);
+    setState(!state);
   };
 
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        [classes.fullList]: 'top',
       })}
       role='presentation'
       onClick={toggleDrawer(anchor, false)}
@@ -43,7 +44,9 @@ export default function TemporaryDrawer({ drawer, setDrawer }) {
       <List>
         {['Create worker', 'Create order', 'Landscaping Page'].map((text) => (
           <ListItem button key={text}>
-            <ListItemIcon>{text}</ListItemIcon>
+            <ListItemIcon>
+              <AiOutlinePlus />
+            </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}

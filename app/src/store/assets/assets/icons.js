@@ -5,6 +5,7 @@ import {
   AiOutlineStar,
   AiOutlineMail,
   AiOutlineClose,
+  AiOutlinePlus,
 } from 'react-icons/ai';
 import {
   BsChevronUp,
@@ -28,6 +29,7 @@ export {
   AiFillStar,
   AiOutlineStar,
   AiOutlineClose,
+  AiOutlinePlus,
   FaInstagram,
   FaFacebookF,
   FaTwitter,

@@ -5,7 +5,7 @@ import Drawer from './Drawer';
 import { GiHamburgerMenu, FaPhoneAlt } from '../store/index';
 
 export default function Header() {
-  const [drawer, setDrawer] = useState(false);
+  const [state, setState] = useState(false);
   return (
     <header className={classes.main}>
       <div className={classes.left}>
@@ -20,9 +20,9 @@ export default function Header() {
         </div>
         <GiHamburgerMenu
           className={classes.hamburger}
-          onClick={() => setDrawer(!drawer)}
+          onClick={() => setState(!state)}
         />
-        {drawer && <Drawer drawer={drawer} setDrawer={setDrawer} />}
+        {state && <Drawer state={state} setState={setState} />}
       </div>
     </header>
   );
