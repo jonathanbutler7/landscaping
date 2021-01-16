@@ -1,3 +1,3 @@
-export * from './CTAs';
-export * from './reviews';
-export * from './services';
+export * from './content/CTAs';
+export * from './content/reviews';
+export * from './content/services';
