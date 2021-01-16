@@ -39,14 +39,6 @@ export default function CreateOrder() {
 
   async function handleSubmit(e) {
     const newOrder = { ...order, status: 'available' };
-    // {
-    //   type,
-    //   date_requested,
-    //   zip,
-    //   items,
-    //   status,
-    // }
-    console.log(newOrder)
     const result = await postNewThing('orders', newOrder, authKey);
     console.log(result);
   }
@@ -54,9 +46,10 @@ export default function CreateOrder() {
   return (
     <form action='' onSubmit={handleValidate}>
       <label htmlFor=''>Type:</label>
+      <br />
       <select onChange={(e) => handleChange(e)} name='type' id=''>
         <option value=''>Select an option</option>
-        {services.map(({name}, i) => (
+        {services.map(({ name }, i) => (
           <option key={i} value={name}>
             {name}
           </option>
@@ -64,6 +57,7 @@ export default function CreateOrder() {
       </select>
       <br />
       <label htmlFor=''>Date requested:</label>
+      <br />
       <input
         onChange={(e) => handleChange(e)}
         name='date_requested'
@@ -71,6 +65,7 @@ export default function CreateOrder() {
       />
       <br />
       <label htmlFor=''>Zip:</label>
+      <br />
       <input
         onChange={(e) => handleChange(e)}
         name='zip'
@@ -78,7 +73,6 @@ export default function CreateOrder() {
         defaultValue={newCustomer ? newCustomer.address : ''}
       />
       <br />
-      <div onClick={() => addItem()}>Add an area</div>
       {areas.map((item, i) => (
         <div key={i} style={{ border: '1px solid black' }}>
           <p>{item.area}</p>
@@ -87,7 +81,12 @@ export default function CreateOrder() {
         </div>
       ))}
       {message && <p>{message}</p>}
-      <button type='submit'>Submit</button>
+      <button className='light-button' onClick={() => addItem()}>
+        Add an area
+      </button>
+      <button className='button' type='submit'>
+        Submit
+      </button>
     </form>
   );
 }

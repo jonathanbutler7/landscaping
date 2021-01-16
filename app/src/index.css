@@ -26,14 +26,14 @@ button {
 button {
   transition: var(--transition);
   border: 1px solid var(--button-blue);
+  
   border-radius: 0.2rem;
   height: 3rem;
   width: 8rem;
   font-weight: 700;
   margin: 1rem;
   text-transform: none;
-  background: #2399da;
-  color: white;
+  
 }
 button:hover {
   transition: var(--transition);
@@ -43,6 +43,8 @@ button:hover {
 
 .button {
   border: 1px solid var(--button-blue);
+  background: #2399da;
+  color: white;
   border-radius: 0.2rem;
   height: 3rem;
   width: 8rem;
@@ -51,7 +53,7 @@ button:hover {
   text-transform: none;
 }
 
-.lightButton {
+.light-button {
   background: #fff;
   padding: 0;
   color: var(--button-blue);
@@ -59,7 +61,7 @@ button:hover {
   font-size: 16px;
 }
 
-.darkButton {
+.dark-button {
   font-size: 16px;
   line-height: 1;
   color: #fff;

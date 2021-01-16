@@ -56,12 +56,15 @@ export default function CustomerForm({ service }) {
       <h3>Enter your details to place an order for {service}.</h3>
       <form action='' onSubmit={handleValidate}>
         <label htmlFor=''>Name:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='name' type='text' />
         <br />
         <label htmlFor=''>Phone:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='phone' type='text' />
         <br />
         <label htmlFor=''>Email:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='email' type='text' />
         <br />
         <Autocomplete
@@ -76,7 +79,7 @@ export default function CustomerForm({ service }) {
         />
         <br />
         {message && <p>{message}</p>}
-        <button type='submit'>Submit</button>
+        <button className="button" type='submit'>Submit</button>
       </form>
     </div>
   );

@@ -37,21 +37,26 @@ export default function WorkerForm() {
       <h3>Worker form</h3>
       <form action='' onSubmit={handleValidate}>
         <label htmlFor=''>Name:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='name' type='text' />
         <br />
         <label htmlFor=''>Phone:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='phone' type='text' />
         <br />
         <label htmlFor=''>Email:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='email' type='text' />
         <br />
         <label htmlFor=''>Address:</label>
+        <br />
         <input onChange={(e) => handleChange(e)} name='address' type='text' />
         <br />
         <label htmlFor=''>Services:</label>
+        <br />
         <select onChange={(e) => handleChange(e)} name='services' id=''>
           <option value=''>Select an option</option>
-          {services.map(({name}, i) => (
+          {services.map(({ name }, i) => (
             <option key={i} value={name}>
               {name}
             </option>
@@ -59,7 +64,9 @@ export default function WorkerForm() {
         </select>
         <br />
         {message && <p>{message}</p>}
-        <button type='submit'>Submit</button>
+        <button className='button' type='submit'>
+          Submit
+        </button>
       </form>
     </div>
   );
