@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;1,300&display=swap');
+
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
@@ -7,9 +9,36 @@
   --button-blue: #0b8ed5;
 }
 
-h1 {
-  font-family: AcherusGrotesque, sans-serif;
+h1,
+p,
+a,
+h2,
+h3,
+h4,
+h5,
+select,
+option,
+button {
+  font-family: Karla, sans-serif;
   color: #3f3f3f;
+}
+
+button {
+  transition: var(--transition);
+  border: 1px solid var(--button-blue);
+  border-radius: 0.2rem;
+  height: 3rem;
+  width: 8rem;
+  font-weight: 700;
+  margin: 1rem;
+  text-transform: none;
+  background: #2399da;
+  color: white;
+}
+button:hover {
+  transition: var(--transition);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.24);
+  cursor: pointer;
 }
 
 .button {

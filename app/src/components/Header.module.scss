@@ -1,3 +1,30 @@
 .main {
-    color: '#3f3f3f';
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #3f3f3f;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .16);
+
+    h1 {
+        padding-left: 1rem;
+    }
+}
+
+.left,
+.right {
+    display: flex;
+    flex: 1;
+}
+
+.right {
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+
+    svg {
+        width: 2rem;
+        height: 2rem;
+        padding: 1rem;
+        color: #3f3f3f;
+    }
 }
