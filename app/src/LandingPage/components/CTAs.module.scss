@@ -1,11 +1,20 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
 .textBlock {
     max-width: 30vw;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    padding: 5rem;
+    margin: 5rem 0;
 }
 
 .cta {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
