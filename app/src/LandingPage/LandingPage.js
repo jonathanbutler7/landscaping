@@ -8,8 +8,8 @@ export default function LandingPage({ service }) {
   return (
     <>
       <Hero service={service} />
-      <CustomerForm service={service.name} />
       <CustomerReviews />
+      <CustomerForm service={service.name} />
       <Footer />
     </>
   );
