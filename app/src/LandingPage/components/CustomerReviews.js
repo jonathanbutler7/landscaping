@@ -3,7 +3,7 @@ import classes from './CustomerReviews.module.scss';
 import CarouselButtons from './CarouselButtons';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { CarouselProvider, Slide, Slider } from 'pure-react-carousel';
-import { reviews, grayBlock, GoQuote, img3 } from '../../store/index';
+import { reviews, grayBlock, GoQuote } from '../../store/index';
 import CustomerRating from './CustomerRating';
 
 export default function CustomerReviews() {
@@ -43,9 +43,8 @@ export default function CustomerReviews() {
 
         <CarouselButtons />
       </CarouselProvider>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex' }}>
         <img src={grayBlock} alt='' style={{ margin: '0 auto' }} />
-        <img src={img3} alt={img3} />
       </div>
     </>
   );

@@ -35,7 +35,7 @@ button {
   text-transform: none;
   
 }
-button:hover, svg:hover {
+button:hover {
   transition: var(--transition);
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.24);
   cursor: pointer;
