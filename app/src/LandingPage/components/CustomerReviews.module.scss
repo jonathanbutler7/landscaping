@@ -1,9 +1,11 @@
 .main {
-    border: 1px solid red;
-    
-    svg {
-        height: 3rem;
-        width: 3rem;
-        color: #e6e6e6;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+svg {
+    height: 3rem;
+    width: 3rem;
+    color: #e6e6e6;
+    border: 1px #e6e6e6;
 }

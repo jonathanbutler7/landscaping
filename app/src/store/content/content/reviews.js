@@ -11,7 +11,7 @@ const reviews = [
     subject: 'Highly recommended',
     title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
-    rating: 5,
+    rating: 4,
     name: 'Hal R.',
     location: 'Haslett, CA',
   },
@@ -27,7 +27,7 @@ const reviews = [
     subject: 'Attentive to my needs',
     title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
-    rating: 5,
+    rating: 4,
     name: 'Jose G.',
     location: 'Palo Pinto, CA',
   },
@@ -35,7 +35,7 @@ const reviews = [
     subject: 'Above and beyond',
     title:
       'I had an excellent experience with Los Angeles Gardening & Landscaping. They came to mulch my flower beds last spring and did a great job, and were very easy to get in touch with. Thanks for the amazing service!',
-    rating: 5,
+    rating: 4,
     name: 'Monica C.',
     location: 'Santa Monica, CA',
   },
