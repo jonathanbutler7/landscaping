@@ -9,6 +9,7 @@ const phoneImg = `${imgurUrl}/AXhrMUg.png`;
 const geometry1 = `${imgurUrl}/Ugf9WoH.png`;
 const geometry2 = `${imgurUrl}/H7KoKCL.png`;
 const geometricGirl = `${imgurUrl}/ITLKoG5.png`;
+const grayBlock = 'https://assets.repairsmith.com/web/img/landing-page/gradient_desktop.png'
 
 export {
   img1,
@@ -20,4 +21,5 @@ export {
   geometry1,
   geometry2,
   geometricGirl,
+  grayBlock,
 };

@@ -48,12 +48,12 @@ export default function CustomerForm({ service }) {
 
   async function handleSubmit(e) {
     const result = await postNewThing('customers', customer, authKey);
-    console.log(result);
+    return result;
   }
 
   return (
     <div>
-      <h3>Enter your details to place an order for {service}.</h3>
+      <h3>Create an account to place an order for {service}.</h3>
       <form action='' onSubmit={handleValidate}>
         <label htmlFor=''>Name:</label>
         <br />
@@ -79,7 +79,9 @@ export default function CustomerForm({ service }) {
         />
         <br />
         {message && <p>{message}</p>}
-        <button className="button" type='submit'>Submit</button>
+        <button className='button' type='submit'>
+          Submit
+        </button>
       </form>
     </div>
   );
