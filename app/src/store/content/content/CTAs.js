@@ -1,20 +1,25 @@
-const CTAs = [
+import { geometry2, img3 } from '../../assets';
+
+const ctas = [
   {
     title: 'Free quote',
-    detail: 'Quotes are upfront and prices are guaranteed',
-    action: 'Get a quote today',
+    content: 'Quotes are upfront and prices are guaranteed',
+    button: 'Get a quote today',
+    img: img3,
   },
   {
     title: 'Satisfaction guaranteed',
-    detail:
-      "If hundreds of great reviews don't convince you, let us go the extra mile",
-    action: 'Give us a try',
+    content:
+      "buttonhundreds of great reviews don't convince you, let us go the extra mile",
+    button: 'Give us a try',
+    img: geometry2,
   },
   {
     title: 'Excellent communication',
-    detail: 'Our customers say we are super easy to get ahold of',
-    action: 'Give us a call',
+    content: 'Our customers say we are super easy to get ahold of',
+    button: 'Give us a call',
+    img: img3,
   },
 ];
 
-export { CTAs };
+export { ctas };
