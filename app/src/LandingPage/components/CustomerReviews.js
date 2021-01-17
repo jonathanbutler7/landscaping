@@ -35,6 +35,9 @@ export default function CustomerReviews() {
               >
                 <h4>{review.subject}</h4>
                 <p>{review.title}</p>
+                <h5>
+                  {review.name}, {review.location}
+                </h5>
                 <CustomerRating rating={review.rating} />
               </div>
             </Slide>

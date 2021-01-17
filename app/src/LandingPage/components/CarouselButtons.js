@@ -1,13 +1,13 @@
 import React from 'react';
 import { ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { BsChevronRight, BsChevronLeft } from '../../store/index';
+import { GoNoNewline } from 'react-icons/go';
 
 const buttonStyle = {
-  color: '#3f3f3f',
-  border: 'none',
   alignItems: 'center',
   justifyContent: 'center',
-  background: 0,
+  background: 'none',
+  border: 'none',
   height: '3rem',
   width: '3rem',
   display: 'flex',
