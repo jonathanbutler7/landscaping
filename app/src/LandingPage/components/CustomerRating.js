@@ -5,7 +5,7 @@ export default function CustomerRating({ rating }) {
   return (
     <div>
       {stars.map((star, i) =>
-        star ? <AiFillStar style={{color: 'gold'}} key={i} /> : <AiOutlineStar key={i} />
+        star ? <AiFillStar style={{color: 'gold'}} key={i} /> : <AiOutlineStar style={{color: 'gainsboro'}} key={i} />
       )}
     </div>
   );

@@ -10,7 +10,7 @@ export default function Header() {
     <header className={classes.main}>
       <div className={classes.left}>
         <h1>
-          <Link to='/landscaping'>🏡 LA Landscaping</Link>
+          <Link to='/landscaping'>🌳 LA Landscaping</Link>
         </h1>
       </div>
       <div className={classes.right}>
