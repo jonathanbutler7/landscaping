@@ -10,12 +10,12 @@
 }
 
 h1,
-p,
-a,
 h2,
 h3,
 h4,
 h5,
+p,
+a,
 select,
 option,
 button {
@@ -48,10 +48,11 @@ a:hover {
 input {
   border: 1px solid #3f3f3f;
   margin: 1rem;
-  padding: .5rem;
-  border-radius: .2rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
 }
-label, select {
+label,
+select {
   margin: 1rem;
 }
 

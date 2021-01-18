@@ -11,6 +11,7 @@
 ./backend/.eslintrc.json
 # testing
 /coverage
+.eslintrc.json
 
 # production
 /build
