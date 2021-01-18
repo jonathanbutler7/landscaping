@@ -1,10 +1,10 @@
 ## What is this?
 
-This is a database built with PostgreSQL, Node.js, and Express for a fictitious landscaping company, **Los Angeles Landscaping & Gardening**. 
+This is a database built with PostgreSQL, Node.js, and Express for a fictitious landscaping company, **Los Angeles Landscaping**. 
 
 The database has three endpoints, `/customers`, `/workers`, and `/orders`. 
 
-It will serve as the backend for a fullstack project which includes 
+It serves as the backend for a fullstack project which includes 
 
 1. A customer-facing landing page where customers may enter contact details and place an order and 
 2. A worker-facing page for workers to view orders the customers have placed.
