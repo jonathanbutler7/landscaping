@@ -3,7 +3,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    h1 {
+        font-size: 45px;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 20px;
+        margin-bottom: 1rem;
+    }
     img {
         width: 50%;
     }
