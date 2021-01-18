@@ -1,17 +1,17 @@
-## What is this?
+# What is this?
 
 This is a full stack project built with PostgreSQL, Node.js, Express, and React for a fictitious landscaping company, **Los Angeles Landscaping**. 
 
 I built this project to demonstrate my ability to automate a small business's order process by building a full stack application that includes:
 
-# FRONTEND: 
+## FRONTEND: 
 1. a landing page: `/landscaping`
 2. a form to capture customer data and redirect to an order page 
 3. a form that allows the customer to create a new order `/orders`
 4. a page for workers to view orders (in progress)
 5. a page for workers to create an account `/workers`
 
-# BACKEND: 
+## BACKEND: 
 The database has three endpoints, `/customers`, `/workers`, and `/orders`. 
 
 ## Folder Structure
