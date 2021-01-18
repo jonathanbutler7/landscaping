@@ -5,12 +5,11 @@
 }
 
 .textBlock {
-    max-width: 30vw;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    padding: 5rem;
-    margin: 5rem 0;
+    padding: 3rem;
+    flex: 1;
 }
 
 .cta {
@@ -18,4 +17,14 @@
     flex-direction: row;
     justify-content: center;
     padding: 3rem;
+    flex: 1;
+    img {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .cta {
+        flex-direction: column;
+    }
 }
