@@ -21,24 +21,29 @@ option,
 button {
   font-family: Karla, sans-serif;
   color: #3f3f3f;
+  transition: var(--transition);
 }
 
 button {
   transition: var(--transition);
   border: 1px solid var(--button-blue);
-  
   border-radius: 0.2rem;
   height: 3rem;
   width: 8rem;
   font-weight: 700;
   margin: 1rem;
   text-transform: none;
-  
 }
 button:hover {
   transition: var(--transition);
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.24);
   cursor: pointer;
+  color: #949494;
+}
+a:hover {
+  transition: var(--transition);
+  cursor: pointer;
+  color: #949494;
 }
 
 input {

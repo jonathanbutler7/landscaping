@@ -9,7 +9,9 @@ export default function Header() {
   return (
     <header className={classes.main}>
       <div className={classes.left}>
-        <h1 className={classes.title}>🏡 LA Landscaping and gardening</h1>
+        <h1>
+          <Link to='/landscaping'>🏡 LA Landscaping</Link>
+        </h1>
       </div>
       <div className={classes.right}>
         <div className={classes.menuContent}>
