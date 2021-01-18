@@ -8,7 +8,7 @@ export default function Hero({ service }) {
       <h1>{service.name} services</h1>
       <p>{service.description}</p>
       <button className="light-button">Book a service</button>
-      <img src={img1} alt={img1} style={{marginBottom: '5rem'}} />
+      <img src={img1} alt={img1} />
       <img src={grayBlock} alt={grayBlock} style={{ width: '100%' }} />
     </div>
   );

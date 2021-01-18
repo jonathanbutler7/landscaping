@@ -1,7 +1,6 @@
 import React from 'react';
 import { ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { BsChevronRight, BsChevronLeft } from '../../store/index';
-import { GoNoNewline } from 'react-icons/go';
 
 const buttonStyle = {
   alignItems: 'center',

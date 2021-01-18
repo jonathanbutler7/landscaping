@@ -1,4 +1,4 @@
-import { geometry2, img3, phoneImg } from '../../assets';
+import { img3, img5, phoneImg } from '../../assets';
 
 const ctas = [
   {
@@ -13,7 +13,7 @@ const ctas = [
     content:
       "If hundreds of great reviews don't convince you, let us go the extra mile",
     button: 'Give us a try',
-    img: geometry2,
+    img: img5,
   },
   {
     title: 'Excellent communication',

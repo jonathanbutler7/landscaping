@@ -4,6 +4,7 @@ import { postNewThing, validateCustomer } from '../helpers/helpers';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import classes from './CustomerForm.module.scss'
 
 export default function CustomerForm({ service }) {
   const { authKey, mapKey } = useLandscaping();
@@ -52,7 +53,7 @@ export default function CustomerForm({ service }) {
   }
 
   return (
-    <div>
+    <div className={classes.main}>
       <h3>Create an account to place an order for {service}.</h3>
       <form action='' onSubmit={handleValidate}>
         <label htmlFor=''>Name:</label>

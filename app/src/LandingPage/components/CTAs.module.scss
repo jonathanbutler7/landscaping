@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    position: relative;
+    
 }
 
 .textBlock {
@@ -26,5 +28,6 @@
 @media only screen and (max-width: 900px) {
     .cta {
         flex-direction: column;
+        align-items: center;
     }
 }
