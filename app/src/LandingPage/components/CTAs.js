@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './CTAs.module.scss';
-import { grayBlock, ctas, geometry1, geometry2 } from '../../store/index';
+import { grayBlock, ctas } from '../../store/index';
 
 export default function CTAs() {
   return (
@@ -9,7 +9,7 @@ export default function CTAs() {
         {ctas.map((cta, i) => (
           <React.Fragment key={i}>
             {i % 2 === 0 ? (
-              <div className={classes.cta} >
+              <div className={classes.cta}>
                 <div className={classes.textBlock}>
                   <h1>{cta.title}</h1>
                   <p>{cta.content}</p>
